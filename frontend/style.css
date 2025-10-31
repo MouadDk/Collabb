@@ -1,0 +1,537 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header and Navigation */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+/* Main Content Sections */
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+/* Hero Section (Homepage) */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Features Section (Homepage) */
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.feature-item {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 25px;
+    text-align: center;
+    flex: 1;
+    min-width: 280px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
+.feature-item h3 {
+    color: #007bff;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.feature-item p {
+    color: #666;
+}
+
+/* Auth Pages (Signup, Login) */
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.auth-form {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.auth-form h2 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.auth-form .btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    margin-top: 20px;
+}
+
+.auth-form p {
+    margin-top: 20px;
+    color: #666;
+}
+
+.auth-form p a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-form p a:hover {
+    text-decoration: underline;
+}
+
+/* Software and Services List Pages */
+.software-list, .services-list {
+    padding: 20px;
+}
+
+.software-list h1, .services-list h1 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
+
+.software-item, .service-item {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.software-item h3, .service-item h3 {
+    color: #333;
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+}
+
+.software-item p, .service-item p {
+    color: #555;
+}
+
+.software-item .btn, .service-item .btn {
+    align-self: flex-start;
+    margin-top: 15px;
+}
+
+/* Cart Page */
+.cart-content {
+    padding: 20px;
+}
+
+.cart-content h1 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
+
+.cart-items {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #fdfdfd;
+}
+
+.cart-items p {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.cart-item p {
+    margin: 0;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.btn-remove {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-remove:hover {
+    background-color: #c82333;
+}
+
+.cart-summary {
+    text-align: right;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.cart-summary p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cart-summary span {
+    color: #007bff;
+}
+
+/* Invoice Page */
+.invoice-details {
+    padding: 30px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #fdfdfd;
+}
+
+.invoice-details h1 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+}
+
+.invoice-details p {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.invoice-details strong {
+    color: #333;
+}
+
+.invoice-items {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.invoice-items h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.invoice-items ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.invoice-items li {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.invoice-items .total {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.invoice-items .total span {
+    color: #007bff;
+}
+
+/* Payment Page */
+.payment-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.payment-form {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.payment-form h1 {
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+}
+
+.payment-form p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.payment-form p span {
+    color: #dc3545;
+}
+
+.form-group-inline {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group-inline .form-group {
+    flex: 1;
+    margin-bottom: 0; /* Override default margin-bottom */
+}
+
+.payment-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.payment-options label {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: #555;
+    cursor: pointer;
+}
+
+.payment-options input[type="radio"] {
+    margin-right: 8px;
+    transform: scale(1.2);
+}
+
+.payment-form .btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    margin-top: 40px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+}
+
+/* Animations (placeholder for now) */
+/* Example: Fade-in effect for main content */
+main {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-links li {
+        margin: 0 10px 10px 10px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-item {
+        width: 90%;
+    }
+
+    .auth-form {
+        padding: 25px;
+    }
+
+    .form-group-inline {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-group-inline .form-group {
+        margin-bottom: 20px;
+    }
+}
