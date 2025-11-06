@@ -4,57 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logiciels - Mon Site Logiciels</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="software.css">
 </head>
 <body>
     <header>
         <nav>
-            <div class="logo">
-                <a href="home.html">Mon Site Logiciels</a>
+            <a href="Welcome_Page.html"><img src="images/logo.png" alt="Logo" class="nav-logo"></a>
+            <div class="nav-buttons">
+                <a href="Welcome_Page.html" class="btn-header secondary">Accueil</a>
+                <a href="software.html" class="btn-header secondary">Logiciels</a>
+                <a href="services.html" class="btn-header secondary">Services</a>
+                <a href="cart.html" class="btn-header secondary">Panier</a>
             </div>
-            <ul class="nav-links">
-                <li><a href="home.html">Accueil</a></li>
-                <li><a href="software.html">Logiciels</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="cart.html">Panier</a></li>
-                <li><a href="Login_page.html">S'inscrire</a></li>
-                <li><a href="Login_page.html">Se connecter</a></li>
-            </ul>
+            <div class="user-info">
+                <img src="https://via.placeholder.com/30x30" alt="User Icon" class="user-icon">
+                <span class="username">Nom Utilisateur</span>
+            </div>
         </nav>
     </header>
 
     <main>
-        <section class="services-list">
+        <section class="software-section">
             <h1>Nos Logiciels</h1>
-            <div class="service-item">
-                <h3>Tableau de Bord de Sécurité d'Entreprise</h3>
-                <p>Surveillez et gérez la sécurité de votre entreprise avec un tableau de bord centralisé.</p>
-                <p>Prix: 299€/mois</p>
-                <button class="btn">Demander un devis</button>
-            </div>
-            <div class="service-item">
-                <h3>Solution de Gestion de la Relation Client (CRM)</h3>
-                <p>Optimisez vos ventes et la satisfaction client avec notre CRM personnalisable.</p>
-                <p>Prix: 49€/utilisateur/mois</p>
-                <button class="btn">Demander un devis</button>
-            </div>
-            <div class="service-item">
-                <h3>Système de Planification des Ressources d'Entreprise (ERP)</h3>
-                <p>Intégrez tous les processus de votre entreprise pour une efficacité maximale.</p>
-                <p>Prix: Sur devis</p>
-                <button class="btn">Demander un devis</button>
-            </div>
-            <div class="service-item">
-                <h3>Logiciel de Gestion des Ressources Humaines (SIRH)</h3>
-                <p>Gérez facilement les RH, la paie et les talents de votre entreprise.</p>
-                <p>Prix: 79€/mois</p>
-                <button class="btn">Demander un devis</button>
-            </div>
-            <div class="service-item">
-                <h3>Plateforme de Collaboration d'Équipe</h3>
-                <p>Facilitez la communication et la collaboration entre vos équipes avec notre solution.</p>
-                <p>Prix: 15€/utilisateur/mois</p>
-                <button class="btn">Demander un devis</button>
+            <div class="software-grid">
+                <div class="software-item">
+                    <h3>Tableau de Bord de Sécurité d'Entreprise</h3>
+                    <p>Surveillez et gérez la sécurité de votre entreprise avec un tableau de bord centralisé.</p>
+                    <p>Prix: 299€/mois</p>
+                    <a href="#" class="buy-button">Demander un devis</a>
+                </div>
+                <div class="software-item">
+                    <h3>Solution de Gestion de la Relation Client (CRM)</h3>
+                    <p>Optimisez vos ventes et la satisfaction client avec notre CRM personnalisable.</p>
+                    <p>Prix: 49€/utilisateur/mois</p>
+                    <a href="#" class="buy-button">Demander un devis</a>
+                </div>
+                <div class="software-item">
+                    <h3>Système de Planification des Ressources d'Entreprise (ERP)</h3>
+                    <p>Intégrez tous les processus de votre entreprise pour une efficacité maximale.</p>
+                    <p>Prix: Sur devis</p>
+                    <a href="#" class="buy-button">Demander un devis</a>
+                </div>
+                <div class="software-item">
+                    <h3>Logiciel de Gestion des Ressources Humaines (SIRH)</h3>
+                    <p>Gérez facilement les RH, la paie et les talents de votre entreprise.</p>
+                    <p>Prix: 79€/mois</p>
+                    <a href="#" class="buy-button">Demander un devis</a>
+                </div>
+                <div class="software-item">
+                    <h3>Plateforme de Collaboration d'Équipe</h3>
+                    <p>Facilitez la communication et la collaboration entre vos équipes avec notre solution.</p>
+                    <p>Prix: 15€/utilisateur/mois</p>
+                    <a href="#" class="buy-button">Demander un devis</a>
+                </div>
             </div>
         </section>
     </main>
