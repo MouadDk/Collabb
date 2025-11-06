@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panier - Mon Site Logiciels</title>
+    <title>Panier - AMK IT Services</title>
     <link rel="stylesheet" href="cart.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -25,19 +26,67 @@
 
     <main>
         <section class="cart-content">
-            <h1>Votre Panier</h1>
-            <p id="empty-cart-message" style="display: none;">Votre panier est actuellement vide.</p>
+            <div class="cart-header">
+                <h1>Votre Panier</h1>
+                <p class="cart-subtitle">Finalisez votre commande</p>
+            </div>
+
+            <div class="empty-cart-container" id="empty-cart-container" style="display: none;">
+                <div class="empty-cart-icon">🛒</div>
+                <h2>Votre panier est vide</h2>
+                <p>Découvrez nos logiciels et services pour commencer</p>
+                <div class="empty-cart-actions">
+                    <a href="software.html" class="btn primary">Voir les logiciels</a>
+                    <a href="services.html" class="btn secondary">Voir les services</a>
+                </div>
+            </div>
+
             <div id="cart-items" class="cart-items">
                 <!-- Cart items will be dynamically loaded here -->
             </div>
-            <div class="cart-summary">
-                <p>Total: <span id="cart-total">0.00€</span></p>
-                <button id="checkout-button" class="checkout-btn" style="display: none;">Procéder au paiement</button>
+
+            <div class="cart-summary" id="cart-summary" style="display: none;">
+                <div class="summary-row">
+                    <span>Sous-total:</span>
+                    <span id="cart-subtotal">0.00€</span>
+                </div>
+                <div class="summary-row">
+                    <span>TVA (20%):</span>
+                    <span id="cart-tax">0.00€</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="cart-total">0.00€</span>
+                </div>
+                <button id="checkout-button" class="checkout-btn">
+                    <span>Procéder au paiement</span>
+                    <span class="checkout-arrow">→</span>
+                </button>
             </div>
-            <button class="btn" onclick="window.location.href='software.html'">Continuer vos achats</button>
+
+            <div class="continue-shopping">
+                <a href="software.html" class="continue-link">← Continuer vos achats</a>
+            </div>
+        </section>
+
+        <!-- Trust Badges -->
+        <section class="trust-section">
+            <div class="trust-item">
+                <div class="trust-icon">🔒</div>
+                <p>Paiement sécurisé</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">✓</div>
+                <p>Garantie satisfait ou remboursé</p>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">📞</div>
+                <p>Support 24/7</p>
+            </div>
         </section>
     </main>
 
+<<<<<<< HEAD
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -87,6 +136,10 @@
         <div class="footer-bottom">
             <p>© 2025 AMK IT Services. Tous droits réservés.</p>
         </div>
+=======
+    <footer>
+        <p>&copy; 2025 AMK IT Services. Tous droits réservés.</p>
+>>>>>>> Mouad
     </footer>
 
     <link rel="stylesheet" href="footer.css">
