@@ -11,10 +11,10 @@
         <nav>
             <a href="Welcome_Page.html"><img src="images/logo.png" alt="Logo" class="nav-logo"></a>
             <div class="nav-buttons">
-                <a href="Welcome_Page.html" class="btn-header secondary">Accueil</a>
+                <a href="Home_Page_Logged_In.html" class="btn-header secondary">Accueil</a>
                 <a href="software.html" class="btn-header secondary">Logiciels</a>
                 <a href="services.html" class="btn-header secondary">Services</a>
-                <a href="cart.html" class="btn-header secondary">Panier</a>
+                <a href="cart.html" class="btn-header secondary">Panier (<span class="cart-count">0</span>)</a>
             </div>
             <div class="user-info">
                 <img src="https://via.placeholder.com/30x30" alt="User Icon" class="user-icon">
@@ -31,31 +31,31 @@
                     <h3>Tableau de Bord de Sécurité d'Entreprise</h3>
                     <p>Surveillez et gérez la sécurité de votre entreprise avec un tableau de bord centralisé.</p>
                     <p>Prix: 299€/mois</p>
-                    <a href="#" class="buy-button">Demander un devis</a>
+                    <button class="buy-button" onclick="addToCart({ id: 'software-1', name: 'Tableau de Bord de Sécurité d\'Entreprise', price: 299.00, image: 'images/software-1.png' })">Ajouter au panier</button>
                 </div>
                 <div class="software-item">
                     <h3>Solution de Gestion de la Relation Client (CRM)</h3>
                     <p>Optimisez vos ventes et la satisfaction client avec notre CRM personnalisable.</p>
                     <p>Prix: 49€/utilisateur/mois</p>
-                    <a href="#" class="buy-button">Demander un devis</a>
+                    <button class="buy-button" onclick="addToCart({ id: 'software-2', name: 'Solution de Gestion de la Relation Client (CRM)', price: 49.00, image: 'images/software-2.png' })">Ajouter au panier</button>
                 </div>
                 <div class="software-item">
                     <h3>Système de Planification des Ressources d'Entreprise (ERP)</h3>
                     <p>Intégrez tous les processus de votre entreprise pour une efficacité maximale.</p>
                     <p>Prix: Sur devis</p>
-                    <a href="#" class="buy-button">Demander un devis</a>
+                    <button class="buy-button" onclick="addToCart({ id: 'software-3', name: 'Système de Planification des Ressources d\'Entreprise (ERP)', price: 0.00, image: 'images/software-3.png' })">Ajouter au panier</button>
                 </div>
                 <div class="software-item">
                     <h3>Logiciel de Gestion des Ressources Humaines (SIRH)</h3>
                     <p>Gérez facilement les RH, la paie et les talents de votre entreprise.</p>
                     <p>Prix: 79€/mois</p>
-                    <a href="#" class="buy-button">Demander un devis</a>
+                    <button class="buy-button" onclick="addToCart({ id: 'software-4', name: 'Logiciel de Gestion des Ressources Humaines (SIRH)', price: 79.00, image: 'images/software-4.png' })">Ajouter au panier</button>
                 </div>
                 <div class="software-item">
                     <h3>Plateforme de Collaboration d'Équipe</h3>
                     <p>Facilitez la communication et la collaboration entre vos équipes avec notre solution.</p>
                     <p>Prix: 15€/utilisateur/mois</p>
-                    <a href="#" class="buy-button">Demander un devis</a>
+                    <button class="buy-button" onclick="addToCart({ id: 'software-5', name: 'Plateforme de Collaboration d\'Équipe', price: 15.00, image: 'images/software-5.png' })">Ajouter au panier</button>
                 </div>
             </div>
         </section>
@@ -65,6 +65,6 @@
         <p>&copy; 2025 Mon Site Logiciels. Tous droits réservés.</p>
     </footer>
 
-    <script src="home_page.js"></script>
+    <script src="cart.js"></script>
 </body>
 </html>
