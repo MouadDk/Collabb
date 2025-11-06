@@ -153,6 +153,34 @@
     </footer>
 
     <link rel="stylesheet" href="footer.css">
+    <!-- Option 1: Google Maps (nécessite une clé API) -->
+    <!-- Décommentez et remplacez YOUR_API_KEY par votre clé API Google Maps -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initGoogleMaps" async defer></script> -->
+    
+    <!-- Option 2: Leaflet/OpenStreetMap (gratuit, sans clé API) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Vérifier que Leaflet est chargé
+        (function checkLeaflet() {
+            if (typeof L !== 'undefined') {
+                window.leafletLoaded = true;
+                console.log('Leaflet chargé avec succès');
+                if (window.onLeafletLoaded) {
+                    window.onLeafletLoaded();
+                }
+            } else {
+                // Réessayer après un court délai
+                setTimeout(checkLeaflet, 100);
+            }
+        })();
+        
+        // Callback pour vérifier que Google Maps est chargé
+        function initGoogleMaps() {
+            window.googleMapsLoaded = true;
+            console.log('Google Maps API chargée avec succès');
+        }
+    </script>
     <script src="script.js"></script>
     <script src="cart.js"></script>
 </body>
