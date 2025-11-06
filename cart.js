@@ -1,20 +1,21 @@
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+function getCart() {
+    return JSON.parse(localStorage.getItem('cart')) || [];
+}
+
+function saveCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+}
 
 function updateCartCount() {
     const cartCountElements = document.querySelectorAll('.cart-count');
-    const currentCart = JSON.parse(localStorage.getItem('cart')) || []; // Get latest cart
+    const currentCart = getCart();
     const count = currentCart.reduce((sum, item) => sum + item.quantity, 0);
     cartCountElements.forEach(element => {
         element.textContent = count;
         element.style.display = count > 0 ? 'inline-block' : 'none';
     });
     console.log('Cart count updated to:', count);
-}
-
-function saveCart() {
-    localStorage.setItem('cart', JSON.stringify(cart));
-    cart = JSON.parse(localStorage.getItem('cart')) || []; // Synchronize cart with localStorage
-    updateCartCount();
 }
 
 function updateCartDisplay() {
@@ -27,6 +28,7 @@ function updateCartDisplay() {
         return; // Exit if cart display elements are not present
     }
 
+    const cart = getCart();
     cartItemsContainer.innerHTML = '';
     let total = 0;
 
@@ -65,6 +67,7 @@ function updateCartDisplay() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded event fired in cart.js');
     updateCartCount(); // Initial update of cart count on page load
     updateCartDisplay(); // Initial update of cart display if on cart.html
 
@@ -74,14 +77,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target.tagName === 'INPUT' && e.target.type === 'number') {
                 const itemId = e.target.dataset.id;
                 const newQuantity = parseInt(e.target.value);
+                let cart = getCart();
                 const itemIndex = cart.findIndex(item => item.id === itemId);
 
                 if (itemIndex > -1 && newQuantity > 0) {
                     cart[itemIndex].quantity = newQuantity;
-                    saveCart();
+                    saveCart(cart);
                 } else if (newQuantity <= 0) {
                     cart.splice(itemIndex, 1);
-                    saveCart();
+                    saveCart(cart);
                 }
             }
         });
@@ -89,8 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
         cartItemsContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('remove-item')) {
                 const itemId = e.target.dataset.id;
+                let cart = getCart();
                 cart = cart.filter(item => item.id !== itemId);
-                saveCart();
+                saveCart(cart);
             }
         });
     }
@@ -99,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Function to add items to cart from other pages
 function addToCart(item) {
     console.log('addToCart function called with item:', item);
+    let cart = getCart();
     const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
 
     if (existingItemIndex > -1) {
@@ -106,7 +112,8 @@ function addToCart(item) {
     } else {
         cart.push({ ...item, quantity: 1 });
     }
-    saveCart(); // Use saveCart to update localStorage and cart count
+    console.log('Cart before adding item:', getCart());
+    saveCart(cart); // Use saveCart to update localStorage and cart count
     console.log('Item added to cart:', item);
-    console.log('Cart after adding item:', JSON.parse(localStorage.getItem('cart')) || []);
+    console.log('Cart after adding item:', getCart());
 }
