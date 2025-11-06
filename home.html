@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>AMK IT Services - Accueil</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="home.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -12,14 +12,21 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="/">
+                <a href="home.html">
                     <img src="images/logo.png" alt="AMK IT Services" class="nav-logo">
                 </a>
             </div>
+            <div class="nav-links">
+                <a href="home.html" class="nav-link">Accueil</a>
+                <a href="software.html" class="nav-link">Logiciels</a>
+                <a href="services.html" class="nav-link">Services</a>
+            </div>
             <div class="nav-buttons">
-                <a href="sign_up.html" class="btn-header primary">Commencer maintenant</a>
-                <a href="Login_page.html" class="btn-header secondary">Se connecter</a>
-                <a href="cart.html" class="btn-header secondary">Panier (<span class="cart-count">0</span>)</a>
+                <a href="cart.html" class="btn-header cart-btn">
+                    <span class="cart-icon">🛒</span>
+                    Panier (<span class="cart-count">0</span>)
+                </a>
+                <a href="sign_up.html" class="btn-header primary">Commencer</a>
             </div>
         </nav>
     </header>
@@ -33,16 +40,94 @@
 
         <section class="features">
             <div class="feature-item">
+                <div class="feature-icon">💻</div>
                 <h3>Installation</h3>
                 <p>Installation professionnelle de logiciels et de matériel.</p>
             </div>
             <div class="feature-item">
+                <div class="feature-icon">🛒</div>
                 <h3>Vente</h3>
                 <p>Large gamme de produits informatiques de qualité.</p>
             </div>
             <div class="feature-item">
+                <div class="feature-icon">🔧</div>
                 <h3>Support</h3>
                 <p>Assistance technique et dépannage rapide et efficace.</p>
+            </div>
+        </section>
+
+        <section class="why-choose-us">
+            <h2>Pourquoi Choisir AMK IT Services ?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h4>Réactivité</h4>
+                    <p>Intervention rapide et support disponible 24/7</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h4>Expertise</h4>
+                    <p>Équipe certifiée avec plus de 10 ans d'expérience</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h4>Prix Compétitifs</h4>
+                    <p>Tarifs transparents et solutions adaptées à votre budget</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔒</div>
+                    <h4>Sécurité</h4>
+                    <p>Protection maximale de vos données et systèmes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="services-preview">
+            <h2>Nos Services Populaires</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Développement Sur Mesure</h3>
+                    <p>Applications web et mobiles adaptées à vos besoins spécifiques</p>
+                    <a href="services.html" class="service-link">En savoir plus →</a>
+                </div>
+                <div class="service-card">
+                    <h3>Cybersécurité</h3>
+                    <p>Protection complète contre les menaces numériques</p>
+                    <a href="services.html" class="service-link">En savoir plus →</a>
+                </div>
+                <div class="service-card">
+                    <h3>Cloud & Infrastructure</h3>
+                    <p>Migration et gestion de vos systèmes dans le cloud</p>
+                    <a href="services.html" class="service-link">En savoir plus →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Clients Satisfaits</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Projets Réalisés</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support Disponible</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Taux de Satisfaction</div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Prêt à Transformer Votre Infrastructure IT ?</h2>
+            <p>Contactez-nous dès aujourd'hui pour une consultation gratuite</p>
+            <div class="cta-buttons">
+                <a href="services.html" class="btn primary">Voir nos services</a>
+                <a href="sign_up.html" class="btn secondary">Créer un compte</a>
             </div>
         </section>
     </main>

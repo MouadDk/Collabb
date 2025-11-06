@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - Mon Site Logiciels</title>
+    <title>Services - AMK IT Services</title>
     <link rel="stylesheet" href="services.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -23,48 +24,140 @@
         </nav>
     </header>
 
+    <!-- Hero Section -->
+    <section class="hero-services">
+        <div class="hero-content">
+            <h1>Nos Services Informatiques</h1>
+            <p>Des solutions complètes pour transformer votre infrastructure IT</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">Tous les services</button>
+            <button class="filter-btn" data-filter="development">Développement</button>
+            <button class="filter-btn" data-filter="security">Sécurité</button>
+            <button class="filter-btn" data-filter="support">Support</button>
+        </div>
+    </section>
+
     <main>
         <section class="services-section">
-            <h1>Nos Services Informatiques</h1>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card" data-category="development">
+                    <div class="service-icon">💻</div>
                     <h3>Développement Logiciel Sur Mesure</h3>
                     <p>Création d'applications web, mobiles et de bureau adaptées à vos processus métier.</p>
-                    <p>Prix: Sur devis</p>
-                    <button class="buy-button" onclick="addToCart({ id: 'service-1', name: 'Développement Logiciel Sur Mesure', price: 0.00, image: 'https://via.placeholder.com/100x100' })">Ajouter au panier</button>
+                    <div class="service-features">
+                        <span class="feature-tag">Web</span>
+                        <span class="feature-tag">Mobile</span>
+                        <span class="feature-tag">Desktop</span>
+                    </div>
+                    <p class="price">Prix: Sur devis</p>
+                    <button class="buy-button" onclick="addToCart({ id: 'service-1', name: 'Développement Logiciel Sur Mesure', price: 0.00, image: 'https://via.placeholder.com/100x100' })">Demander un devis</button>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-category="development">
+                    <div class="service-icon">🚀</div>
                     <h3>Conseil en Transformation Digitale</h3>
                     <p>Accompagnement stratégique pour l'intégration de nouvelles technologies et l'optimisation de vos opérations.</p>
-                    <p>Prix: Sur devis</p>
-                    <button class="buy-button" onclick="addToCart({ id: 'service-2', name: 'Conseil en Transformation Digitale', price: 0.00, image: 'https://via.placeholder.com/100x100' })">Ajouter au panier</button>
+                    <div class="service-features">
+                        <span class="feature-tag">Stratégie</span>
+                        <span class="feature-tag">Innovation</span>
+                    </div>
+                    <p class="price">Prix: Sur devis</p>
+                    <button class="buy-button" onclick="addToCart({ id: 'service-2', name: 'Conseil en Transformation Digitale', price: 0.00, image: 'https://via.placeholder.com/100x100' })">Demander un devis</button>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-category="security">
+                    <div class="service-icon">🛡️</div>
                     <h3>Cybersécurité et Protection des Données</h3>
                     <p>Mise en place de solutions de sécurité robustes et audits pour protéger vos actifs numériques.</p>
-                    <p>Prix: Sur devis</p>
-                    <button class="buy-button" onclick="addToCart({ id: 'service-3', name: 'Cybersécurité et Protection des Données', price: 0.00, image: 'https://via.placeholder.com/100x100' })">Ajouter au panier</button>
+                    <div class="service-features">
+                        <span class="feature-tag">Audit</span>
+                        <span class="feature-tag">Protection</span>
+                        <span class="feature-tag">Conformité</span>
+                    </div>
+                    <p class="price">Prix: Sur devis</p>
+                    <button class="buy-button" onclick="addToCart({ id: 'service-3', name: 'Cybersécurité et Protection des Données', price: 0.00, image: 'https://via.placeholder.com/100x100' })">Demander un devis</button>
                 </div>
-                <div class="service-card">
+                <div class="service-card" data-category="support">
+                    <div class="service-icon">⚙️</div>
                     <h3>Infogérance et Support IT</h3>
                     <p>Gestion complète de votre infrastructure informatique et support technique 24/7.</p>
-                    <p>Prix: À partir de 200€/mois</p>
+                    <div class="service-features">
+                        <span class="feature-tag">24/7</span>
+                        <span class="feature-tag">Monitoring</span>
+                        <span class="feature-tag">Maintenance</span>
+                    </div>
+                    <p class="price">À partir de 200€/mois</p>
                     <button class="buy-button" onclick="addToCart({ id: 'service-4', name: 'Infogérance et Support IT', price: 200.00, image: 'https://via.placeholder.com/100x100' })">Ajouter au panier</button>
                 </div>
-                <div class="service-card">
-                    <h3>Formation et Accompagnement Utilisateurs</h3>
+                <div class="service-card" data-category="support">
+                    <div class="service-icon">📚</div>
+                    <h3>Formation et Accompagnement</h3>
                     <p>Sessions de formation personnalisées pour maximiser l'adoption et l'efficacité de vos outils.</p>
-                    <p>Prix: Sur devis</p>
-                    <button class="buy-button" onclick="addToCart({ id: 'service-5', name: 'Formation et Accompagnement Utilisateurs', price: 0.00, image: 'https://via.placeholder.com/100x100' })">Ajouter au panier</button>
+                    <div class="service-features">
+                        <span class="feature-tag">Formation</span>
+                        <span class="feature-tag">Coaching</span>
+                    </div>
+                    <p class="price">Prix: Sur devis</p>
+                    <button class="buy-button" onclick="addToCart({ id: 'service-5', name: 'Formation et Accompagnement Utilisateurs', price: 0.00, image: 'https://via.placeholder.com/100x100' })">Demander un devis</button>
+                </div>
+                <div class="service-card" data-category="development">
+                    <div class="service-icon">☁️</div>
+                    <h3>Migration Cloud</h3>
+                    <p>Migration sécurisée de vos systèmes vers le cloud avec optimisation des coûts.</p>
+                    <div class="service-features">
+                        <span class="feature-tag">AWS</span>
+                        <span class="feature-tag">Azure</span>
+                        <span class="feature-tag">GCP</span>
+                    </div>
+                    <p class="price">Prix: Sur devis</p>
+                    <button class="buy-button" onclick="addToCart({ id: 'service-6', name: 'Migration Cloud', price: 0.00, image: 'https://via.placeholder.com/100x100' })">Demander un devis</button>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Why Choose Our Services -->
+    <section class="why-services">
+        <h2>Pourquoi Choisir Nos Services ?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-icon">✓</div>
+                <h3>Expertise Certifiée</h3>
+                <p>Équipe d'experts certifiés avec plus de 10 ans d'expérience</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">✓</div>
+                <h3>Support Dédié</h3>
+                <p>Un chef de projet dédié pour chaque mission</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">✓</div>
+                <h3>Garantie Qualité</h3>
+                <p>Satisfaction garantie ou remboursement</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">✓</div>
+                <h3>Tarifs Transparents</h3>
+                <p>Devis détaillés sans frais cachés</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-services">
+        <h2>Besoin d'un Service Personnalisé ?</h2>
+        <p>Contactez-nous pour discuter de vos besoins spécifiques</p>
+        <a href="sign_up.html" class="btn-cta">Demander une consultation gratuite</a>
+    </section>
+
     <footer>
-        <p>&copy; 2025 Mon Site Logiciels. Tous droits réservés.</p>
+        <p>&copy; 2025 AMK IT Services. Tous droits réservés.</p>
     </footer>
 
     <script src="cart.js"></script>
+    <script src="services.js"></script>
 </body>
 </html>

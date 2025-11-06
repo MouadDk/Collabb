@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logiciels - Mon Site Logiciels</title>
+    <title>Logiciels - AMK IT Services</title>
     <link rel="stylesheet" href="software.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -23,48 +24,124 @@
         </nav>
     </header>
 
+    <!-- Hero Section -->
+    <section class="hero-software">
+        <div class="hero-content">
+            <h1>Nos Solutions Logicielles</h1>
+            <p>Des outils puissants pour optimiser votre entreprise</p>
+        </div>
+    </section>
+
+    <!-- Search and Filter -->
+    <section class="search-filter-section">
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Rechercher un logiciel..." class="search-input">
+            <div class="sort-container">
+                <label for="sort-select">Trier par:</label>
+                <select id="sort-select" class="sort-select">
+                    <option value="default">Par défaut</option>
+                    <option value="price-low">Prix croissant</option>
+                    <option value="price-high">Prix décroissant</option>
+                    <option value="name">Nom A-Z</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
     <main>
         <section class="software-section">
-            <h1>Nos Logiciels</h1>
             <div class="software-grid">
-                <div class="software-item">
+                <div class="software-item" data-name="Tableau de Bord de Sécurité d'Entreprise" data-price="299">
+                    <div class="software-badge">Populaire</div>
+                    <div class="software-icon">🛡️</div>
                     <h3>Tableau de Bord de Sécurité d'Entreprise</h3>
                     <p>Surveillez et gérez la sécurité de votre entreprise avec un tableau de bord centralisé.</p>
-                    <p>Prix: 299€/mois</p>
+                    <div class="software-features">
+                        <span class="feature-tag">Monitoring</span>
+                        <span class="feature-tag">Alertes</span>
+                        <span class="feature-tag">Rapports</span>
+                    </div>
+                    <p class="price">299€/mois</p>
                     <button class="buy-button" onclick="addToCart({ id: 'software-1', name: 'Tableau de Bord de Sécurité d\'Entreprise', price: 299.00, image: 'images/software-1.png' })">Ajouter au panier</button>
                 </div>
-                <div class="software-item">
-                    <h3>Solution de Gestion de la Relation Client (CRM)</h3>
+                <div class="software-item" data-name="Solution de Gestion de la Relation Client (CRM)" data-price="49">
+                    <div class="software-icon">📊</div>
+                    <h3>Solution CRM</h3>
                     <p>Optimisez vos ventes et la satisfaction client avec notre CRM personnalisable.</p>
-                    <p>Prix: 49€/utilisateur/mois</p>
+                    <div class="software-features">
+                        <span class="feature-tag">Ventes</span>
+                        <span class="feature-tag">Marketing</span>
+                        <span class="feature-tag">Support</span>
+                    </div>
+                    <p class="price">49€/utilisateur/mois</p>
                     <button class="buy-button" onclick="addToCart({ id: 'software-2', name: 'Solution de Gestion de la Relation Client (CRM)', price: 49.00, image: 'images/software-2.png' })">Ajouter au panier</button>
                 </div>
-                <div class="software-item">
-                    <h3>Système de Planification des Ressources d'Entreprise (ERP)</h3>
+                <div class="software-item" data-name="Système de Planification des Ressources d'Entreprise (ERP)" data-price="0">
+                    <div class="software-badge premium">Premium</div>
+                    <div class="software-icon">⚙️</div>
+                    <h3>Système ERP</h3>
                     <p>Intégrez tous les processus de votre entreprise pour une efficacité maximale.</p>
-                    <p>Prix: Sur devis</p>
-                    <button class="buy-button" onclick="addToCart({ id: 'software-3', name: 'Système de Planification des Ressources d\'Entreprise (ERP)', price: 0.00, image: 'images/software-3.png' })">Ajouter au panier</button>
+                    <div class="software-features">
+                        <span class="feature-tag">Finance</span>
+                        <span class="feature-tag">Inventaire</span>
+                        <span class="feature-tag">Production</span>
+                    </div>
+                    <p class="price">Sur devis</p>
+                    <button class="buy-button" onclick="addToCart({ id: 'software-3', name: 'Système de Planification des Ressources d\'Entreprise (ERP)', price: 0.00, image: 'images/software-3.png' })">Demander un devis</button>
                 </div>
-                <div class="software-item">
-                    <h3>Logiciel de Gestion des Ressources Humaines (SIRH)</h3>
+                <div class="software-item" data-name="Logiciel de Gestion des Ressources Humaines (SIRH)" data-price="79">
+                    <div class="software-icon">👥</div>
+                    <h3>Logiciel SIRH</h3>
                     <p>Gérez facilement les RH, la paie et les talents de votre entreprise.</p>
-                    <p>Prix: 79€/mois</p>
+                    <div class="software-features">
+                        <span class="feature-tag">Paie</span>
+                        <span class="feature-tag">Recrutement</span>
+                        <span class="feature-tag">Formation</span>
+                    </div>
+                    <p class="price">79€/mois</p>
                     <button class="buy-button" onclick="addToCart({ id: 'software-4', name: 'Logiciel de Gestion des Ressources Humaines (SIRH)', price: 79.00, image: 'images/software-4.png' })">Ajouter au panier</button>
                 </div>
-                <div class="software-item">
-                    <h3>Plateforme de Collaboration d'Équipe</h3>
+                <div class="software-item" data-name="Plateforme de Collaboration d'Équipe" data-price="15">
+                    <div class="software-badge">Nouveau</div>
+                    <div class="software-icon">💬</div>
+                    <h3>Plateforme de Collaboration</h3>
                     <p>Facilitez la communication et la collaboration entre vos équipes avec notre solution.</p>
-                    <p>Prix: 15€/utilisateur/mois</p>
+                    <div class="software-features">
+                        <span class="feature-tag">Chat</span>
+                        <span class="feature-tag">Vidéo</span>
+                        <span class="feature-tag">Partage</span>
+                    </div>
+                    <p class="price">15€/utilisateur/mois</p>
                     <button class="buy-button" onclick="addToCart({ id: 'software-5', name: 'Plateforme de Collaboration d\'Équipe', price: 15.00, image: 'images/software-5.png' })">Ajouter au panier</button>
+                </div>
+                <div class="software-item" data-name="Logiciel de Comptabilité" data-price="89">
+                    <div class="software-icon">💰</div>
+                    <h3>Logiciel de Comptabilité</h3>
+                    <p>Gérez votre comptabilité et vos finances en toute simplicité.</p>
+                    <div class="software-features">
+                        <span class="feature-tag">Facturation</span>
+                        <span class="feature-tag">Reporting</span>
+                        <span class="feature-tag">Conformité</span>
+                    </div>
+                    <p class="price">89€/mois</p>
+                    <button class="buy-button" onclick="addToCart({ id: 'software-6', name: 'Logiciel de Comptabilité', price: 89.00, image: 'images/software-6.png' })">Ajouter au panier</button>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Comparison Section -->
+    <section class="comparison-section">
+        <h2>Besoin d'Aide Pour Choisir ?</h2>
+        <p>Contactez notre équipe pour une démonstration personnalisée</p>
+        <a href="sign_up.html" class="btn-demo">Demander une démo gratuite</a>
+    </section>
+
     <footer>
-        <p>&copy; 2025 Mon Site Logiciels. Tous droits réservés.</p>
+        <p>&copy; 2025 AMK IT Services. Tous droits réservés.</p>
     </footer>
 
     <script src="cart.js"></script>
+    <script src="software.js"></script>
 </body>
 </html>
