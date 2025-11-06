@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AMK IT Services - Accueil</title>
+    <link rel="stylesheet" href="Home_Page_Logged_In.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header Minimaliste -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="Home_Page_Logged_In.html">
+                    <img src="images/logo.png" alt="AMK IT Services" class="nav-logo">
+                </a>
+            </div>
+            <div class="nav-buttons">
+                <a href="software.html" class="btn-header primary">Logiciels</a>
+                <a href="services.html" class="btn-header secondary">Services</a>
+                <a href="cart.html" class="btn-header accent">Panier</a>
+                <span id="userName" class="user-name"></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Split Section -->
+    <section class="hero-split">
+        <!-- Left Side: Welcome -->
+        <div class="hero-left">
+            <div class="welcome-content">
+                <h2>Bienvenue sur AMK IT Services</h2>
+                <p class="welcome-text">Installation, vente et services informatiques en un clic.</p>
+                <div class="cta-buttons">
+                    <a href="services.html" class="btn primary">Découvrir nos services</a>
+                    <a href="contact.html" class="btn secondary">Contactez-nous</a>
+                    <a href="cart.html" class="btn accent">Commander maintenant</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Interactive Box -->
+        <div class="hero-right">
+            <div class="interactive-box">
+                <div class="slider-container">
+                    <!-- Navigation Arrows -->
+                    <button class="slider-arrow prev-arrow" aria-label="Slide précédent">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="slider-arrow next-arrow" aria-label="Slide suivant">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                    <!-- Statistics Slide -->
+                    <div class="slide" id="statistics">
+                        <h3>Nos Statistiques</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number">500+</span>
+                                <span class="stat-label">Clients Satisfaits</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">50+</span>
+                                <span class="stat-label">Pays Desservis</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">98%</span>
+                                <span class="stat-label">Taux de Satisfaction</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">24/7</span>
+                                <span class="stat-label">Support Client</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Global Network Slide -->
+                    <div class="slide" id="network">
+                        <h3>Notre Réseau Mondial</h3>
+                        <div class="network-content">
+                            <div class="world-map-container">
+                                <div class="world-map">
+                                    <div class="map-point paris" data-region="Europe">
+                                        <div class="point-pulse"></div>
+                                        <div class="location-info">
+                                            <h4>Paris</h4>
+                                            <p>Siège Social Europe</p>
+                                            <p>150+ Clients</p>
+                                        </div>
+                                    </div>
+                                    <div class="map-point london" data-region="Europe">
+                                        <div class="point-pulse"></div>
+                                        <div class="location-info">
+                                            <h4>Londres</h4>
+                                            <p>Hub Financier</p>
+                                            <p>100+ Clients</p>
+                                        </div>
+                                    </div>
+                                    <div class="map-point berlin" data-region="Europe">
+                                        <div class="point-pulse"></div>
+                                        <div class="location-info">
+                                            <h4>Berlin</h4>
+                                            <p>Centre Tech</p>
+                                            <p>80+ Clients</p>
+                                        </div>
+                                    </div>
+                                    <div class="map-point new-york" data-region="Amériques">
+                                        <div class="point-pulse"></div>
+                                        <div class="location-info">
+                                            <h4>New York</h4>
+                                            <p>Hub Américain</p>
+                                            <p>200+ Clients</p>
+                                        </div>
+                                    </div>
+                                    <div class="map-point san-francisco" data-region="Amériques">
+                                        <div class="point-pulse"></div>
+                                        <div class="location-info">
+                                            <h4>San Francisco</h4>
+                                            <p>Innovation Lab</p>
+                                            <p>120+ Clients</p>
+                                        </div>
+                                    </div>
+                                    <div class="map-point tokyo" data-region="Asie-Pacifique">
+                                        <div class="point-pulse"></div>
+                                        <div class="location-info">
+                                            <h4>Tokyo</h4>
+                                            <p>Hub Asiatique</p>
+                                            <p>180+ Clients</p>
+                                        </div>
+                                    </div>
+                                    <div class="map-point singapore" data-region="Asie-Pacifique">
+                                        <div class="point-pulse"></div>
+                                        <div class="location-info">
+                                            <h4>Singapour</h4>
+                                            <p>Centre ASEAN</p>
+                                            <p>150+ Clients</p>
+                                        </div>
+                                    </div>
+                                    <div class="map-point sydney" data-region="Asie-Pacifique">
+                                        <div class="point-pulse"></div>
+                                        <div class="location-info">
+                                            <h4>Sydney</h4>
+                                            <p>Hub Océanie</p>
+                                            <p>90+ Clients</p>
+                                        </div>
+                                    </div>
+                                    <div class="map-point dubai" data-region="MENA">
+                                        <div class="point-pulse"></div>
+                                        <div class="location-info">
+                                            <h4>Dubai</h4>
+                                            <p>Hub MENA</p>
+                                            <p>130+ Clients</p>
+                                        </div>
+                                    </div>
+                                    <div class="map-legend">
+                                        <div class="legend-item europe">Europe</div>
+                                        <div class="legend-item americas">Amériques</div>
+                                        <div class="legend-item asia">Asie-Pacifique</div>
+                                        <div class="legend-item mena">MENA</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="network-stats">
+                                <div class="network-stat-item">
+                                    <span class="network-number">1200+</span>
+                                    <span class="network-label">Clients Globaux</span>
+                                </div>
+                                <div class="network-stat-item">
+                                    <span class="network-number">9</span>
+                                    <span class="network-label">Hubs Majeurs</span>
+                                </div>
+                                <div class="network-stat-item">
+                                    <span class="network-number">24/7</span>
+                                    <span class="network-label">Support Multi-Langues</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advantages Slide -->
+                    <div class="slide" id="advantages">
+                        <h3>Pourquoi Nous Choisir</h3>
+                        <div class="advantages-list">
+                            <div class="advantage-item">
+                                <i class="advantage-icon expertise"></i>
+                                <h4>Expertise Technique</h4>
+                                <p>Une équipe d'experts certifiés</p>
+                            </div>
+                            <div class="advantage-item">
+                                <i class="advantage-icon innovation"></i>
+                                <h4>Innovation Continue</h4>
+                                <p>Solutions à la pointe de la technologie</p>
+                            </div>
+                            <div class="advantage-item">
+                                <i class="advantage-icon support"></i>
+                                <h4>Support Premium</h4>
+                                <p>Assistance 24/7 personnalisée</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonials Slide -->
+                    <div class="slide" id="testimonials">
+                        <h3>Témoignages</h3>
+                        <div class="testimonials-container">
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    <p>"AMK IT Services a transformé notre infrastructure IT avec des solutions innovantes."</p>
+                                    <div class="testimonial-author">
+                                        <strong>Marie Dupont</strong>
+                                        <span>Directrice IT, Tech Corp</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Navigation -->
+                <div class="slider-nav">
+                    <button class="nav-dot active" data-slide="statistics"></button>
+                    <button class="nav-dot" data-slide="network"></button>
+                    <button class="nav-dot" data-slide="advantages"></button>
+                    <button class="nav-dot" data-slide="testimonials"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos de nous</h3>
+                <p>AMK IT Services est votre partenaire de confiance pour tous vos besoins en services informatiques, offrant des solutions innovantes et personnalisées depuis 2020.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">
+                        <img src="images/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="images/twitter.png" alt="Twitter">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="images/linkedin.png" alt="LinkedIn">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="images/instagram.png" alt="Instagram">
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Nos Services</h3>
+                <ul class="footer-links">
+                    <li><a href="services.html">Services IT</a></li>
+                    <li><a href="software.html">Logiciels</a></li>
+                    <li><a href="#">Support Technique</a></li>
+                    <li><a href="#">Formation</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Liens Utiles</h3>
+                <ul class="footer-links">
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Contactez-nous</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>123 Avenue de l'Innovation</p>
+                <p>75001 Paris, France</p>
+                <p>Email: contact@amkit.com</p>
+                <p>Tél: +33 1 23 45 67 89</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 AMK IT Services. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <link rel="stylesheet" href="footer.css">
+    <script src="Home_Page_Logged_In.js"></script>
+</body>
+</html>
