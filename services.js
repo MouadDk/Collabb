@@ -55,4 +55,54 @@ document.addEventListener('DOMContentLoaded', () => {
         section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         fadeInObserver.observe(section);
     });
+
+    // User menu functionality
+    const userNameSpan = document.getElementById('userName');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const loggedInUser = localStorage.getItem('loggedInUser');
+
+    if (loggedInUser && userNameSpan) {
+        userNameSpan.textContent = loggedInUser;
+        
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('loggedInUser');
+                window.location.href = 'Login_page.html';
+            });
+        }
+    } else if (!loggedInUser) {
+        window.location.href = 'Login_page.html';
+    }
+
+    // Update cart count
+    function updateCartCount() {
+        const cartCountElements = document.querySelectorAll('.cart-count');
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        cartCountElements.forEach(element => {
+            if (count > 0) {
+                element.textContent = `(${count})`;
+                element.style.display = 'inline';
+            } else {
+                element.textContent = '';
+                element.style.display = 'none';
+            }
+        });
+    }
+
+    // Initialize cart count
+    updateCartCount();
+
+    // Update cart count when storage changes (other tabs)
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'cart') {
+            updateCartCount();
+        }
+    });
+
+    // Update cart count when cart is updated (same tab)
+    window.addEventListener('cartUpdated', () => {
+        updateCartCount();
+    });
 });

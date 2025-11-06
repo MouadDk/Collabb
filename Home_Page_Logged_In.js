@@ -5,15 +5,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // User authentication
     const userNameSpan = document.getElementById('userName');
+    const logoutBtn = document.getElementById('logoutBtn');
     const loggedInUser = localStorage.getItem('loggedInUser');
 
     if (loggedInUser) {
-        userNameSpan.textContent = `Welcome, ${loggedInUser}`;
-        userNameSpan.style.cursor = 'pointer';
-        userNameSpan.addEventListener('click', (e) => {
+        userNameSpan.textContent = loggedInUser;
+        
+        // Logout functionality
+        logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
             localStorage.removeItem('loggedInUser');
             window.location.href = 'Login_page.html';
+        });
+
+        // Update cart count
+        function updateCartCount() {
+            const cartCountElements = document.querySelectorAll('.cart-count');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            cartCountElements.forEach(element => {
+                if (count > 0) {
+                    element.textContent = `(${count})`;
+                    element.style.display = 'inline';
+                } else {
+                    element.textContent = '';
+                    element.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize cart count
+        updateCartCount();
+
+        // Update cart count when storage changes (other tabs)
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'cart') {
+                updateCartCount();
+            }
+        });
+
+        // Update cart count when cart is updated (same tab)
+        window.addEventListener('cartUpdated', () => {
+            updateCartCount();
         });
     } else {
         window.location.href = 'Login_page.html';

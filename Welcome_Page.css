@@ -92,8 +92,8 @@ nav {
 .hero-split {
     display: flex;
     min-height: calc(100vh - 80px);
-    max-width: 1400px;
-    margin: 0 auto;
+    max-width: 1700px;
+    
 }
 
 .hero-left, .hero-right {

@@ -12,14 +12,30 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="/">
+                <a href="Home_Page_Logged_In.html">
                     <img src="images/logo.png" alt="AMK IT Services" class="nav-logo">
                 </a>
             </div>
+            <div class="nav-links">
+                <a href="Home_Page_Logged_In.html" class="nav-link">Accueil</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="software.html" class="nav-link">Logiciels</a>
+            </div>
             <div class="nav-buttons">
-                <a href="sign_up.html" class="btn-header primary">Commencer maintenant</a>
-                <a href="Login_page.html" class="btn-header secondary">Se connecter</a>
-                <a href="cart.html" class="btn-header secondary">Panier (<span class="cart-count">0</span>)</a>
+                    <a href="cart.html" class="btn-header cart-btn">
+                    <span>🛒</span>
+                    <span>Panier</span>
+                    <span class="cart-count"></span>
+                </a>
+                <div class="user-menu">
+                    <div class="user-info" id="userInfo">
+                        <span class="user-avatar">👤</span>
+                        <span class="user-name" id="userName"></span>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="#" class="dropdown-item" id="logoutBtn">Déconnexion</a>
+                    </div>
+                </div>
             </div>
         </nav>
     </header>
@@ -120,7 +136,6 @@
             <p>Contactez-nous dès aujourd'hui pour une consultation gratuite</p>
             <div class="cta-buttons">
                 <a href="services.html" class="btn primary">Voir nos services</a>
-                <a href="sign_up.html" class="btn secondary">Créer un compte</a>
             </div>
         </section>
     </main>
@@ -129,5 +144,7 @@
         <p>© 2025 AMK IT Services. Tous droits réservés.</p>
     </footer>
 
+    <script src="script.js"></script>
+    <script src="Home_Page_Logged_In.js"></script>
 </body>
 </html>
