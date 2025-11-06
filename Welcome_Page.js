@@ -1,12 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Prevent multiple executions
+    if (window.isPageLoaded) return;
+    window.isPageLoaded = true;
+    
     const navLinks = document.querySelectorAll('.nav-links a');
     const loggedInUser = localStorage.getItem('loggedInUser');
+    
+    // Ne pas rediriger automatiquement, laisser l'utilisateur naviguer manuellement
+    const currentPage = window.location.pathname.split('/').pop();
+    if (currentPage !== 'Login_page.html' && currentPage !== 'sign_up.html' && !loggedInUser) {
+        // Optionnel : ajouter un message pour informer l'utilisateur qu'il n'est pas connecté
+        console.log('Utilisateur non connecté');
+    }
 
     navLinks.forEach(link => {
-        // Highlight active link
-        // Highlight active link - adjust to check for relative paths
-        const currentFileName = window.location.pathname.split('/').pop();
-        if (link.getAttribute('href') === currentFileName || (currentFileName === 'home.html' && link.getAttribute('href') === 'home.html')) {
+        const currentPath = window.location.pathname;
+        const currentFileName = currentPath.split('/').pop() || 'Welcome_Page.html';
+        
+        if (link.getAttribute('href') === currentFileName) {
             link.classList.add('active');
         }
 

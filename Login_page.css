@@ -54,12 +54,6 @@ body {
     transition: opacity 0.5s ease-in-out;
 }
 
-.form-container.hidden {
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
 
 h2 {
     color: #1a1f2e; /* Dark text from Home_Page.css */

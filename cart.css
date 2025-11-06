@@ -1,0 +1,310 @@
+/* General Body Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa; /* Light background from project */
+    color: #1a1f2e; /* Dark text from project */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header Styles (assuming a similar header to Welcome_Page) */
+header {
+    background-color: #1a1f2e;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    height: 55px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+    transform: scale(1.05);
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.btn-header {
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-header.primary {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #1a1f2e;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.btn-header.primary:hover {
+    background: linear-gradient(135deg, #e6c200, #ffed4e);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+}
+
+.btn-header.secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid #ffd700;
+}
+
+.btn-header.secondary:hover {
+    background: #ffd700;
+    color: #1a1f2e;
+    border-color: #ffd700;
+    transform: translateY(-3px);
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-icon {
+    border-radius: 50%;
+}
+
+.username {
+    color: white;
+    font-weight: 600;
+}
+
+/* Main Content Area */
+.cart-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #1a1f2e;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.cart-items {
+    margin-bottom: 30px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item-details {
+    flex-grow: 1;
+}
+
+.item-details h3 {
+    margin: 0 0 8px 0;
+    color: #1a1f2e;
+    font-size: 1.3rem;
+}
+
+.item-details p {
+    margin: 0;
+    color: #555;
+    font-size: 1rem;
+}
+
+.item-quantity, .item-price {
+    font-weight: 600;
+    color: #1a1f2e;
+    margin-left: 20px;
+    font-size: 1.1rem;
+}
+
+.item-quantity input {
+    width: 50px;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.remove-item {
+    background: transparent;
+    color: #ff4d4d;
+    border: 2px solid #ff4d4d;
+    padding: 8px 12px;
+    border-radius: 50px; /* Make it more rounded */
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-left: 20px;
+}
+
+.remove-item:hover {
+    background: #ff4d4d;
+    color: white;
+    border-color: #ff4d4d;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4);
+}
+
+/* General Button Styles for .btn */
+.btn {
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffd700, #ffed4e); /* Primary button gradient */
+    color: #1a1f2e;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #e6c200, #ffed4e);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+}
+
+.cart-summary {
+    border-top: 2px solid #eee;
+    padding-top: 20px;
+    text-align: right;
+}
+
+.cart-summary p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #1a1f2e;
+}
+
+.cart-summary .total-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffd700; /* Gold accent for total price */
+}
+
+.checkout-btn {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e); /* Primary button gradient */
+    color: #1a1f2e;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    margin-top: 30px;
+    text-decoration: none; /* For anchor tag buttons */
+}
+
+.checkout-btn:hover {
+    background: linear-gradient(135deg, #e6c200, #ffed4e);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+}
+
+/* Footer Styles (assuming a similar footer to Welcome_Page) */
+footer {
+    background-color: #1a1f2e;
+    color: #aaa;
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 0.9rem;
+    margin-top: 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cart-container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .cart-item {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .item-image {
+        margin: 0 0 15px 0;
+    }
+
+    .item-details {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .item-quantity, .item-price, .remove-item {
+        margin: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .item-details h3 {
+        font-size: 1.1rem;
+    }
+
+    .item-quantity, .item-price {
+        font-size: 1rem;
+    }
+
+    .checkout-btn {
+        font-size: 1.1rem;
+        padding: 12px 15px;
+    }
+}
