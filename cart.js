@@ -73,19 +73,26 @@ function updateCartDisplay() {
                 <img src="${item.image || 'https://via.placeholder.com/100x100'}" alt="${item.name}" class="item-image" onerror="this.src='https://via.placeholder.com/100x100'">
             `;
             
+            // Check if this is a quote item
+            const isQuoteItem = item.isQuote || item.price === 0;
+            const quoteStatusBadge = isQuoteItem ? `<span class="quote-badge ${item.quoteStatus || 'pending'}">Devis demandé</span>` : '';
+            const priceDisplay = isQuoteItem ? 'Sur devis' : `${item.price.toFixed(2)}€`;
+            const totalDisplay = isQuoteItem ? 'En attente' : `${((item.price || 0) * (item.quantity || 1)).toFixed(2)}€`;
+            
             itemElement.innerHTML = `
                 ${displayIcon}
                 <div class="item-details">
-                    <h3>${item.name}</h3>
-                    <p>Prix unitaire: ${item.price.toFixed(2)}€</p>
+                    <h3>${item.name} ${quoteStatusBadge}</h3>
+                    <p>Prix unitaire: ${priceDisplay}</p>
                     ${item.installationInfo ? `<p class="installation-info">✓ Installation configurée</p>` : ''}
+                    ${isQuoteItem ? `<p class="quote-info">💬 Notre équipe vous contactera sous 24-48h</p>` : ''}
                 </div>
                 <div class="item-quantity">
                     <label>Quantité:</label>
-                    <input type="number" value="${item.quantity || 1}" min="1" data-id="${item.id}">
+                    <input type="number" value="${item.quantity || 1}" min="1" data-id="${item.id}" ${isQuoteItem ? 'disabled' : ''}>
                 </div>
                 <div class="item-price">
-                    ${((item.price || 0) * (item.quantity || 1)).toFixed(2)}€
+                    ${totalDisplay}
                 </div>
                 ${installationIcon}
                 <button class="remove-item" data-id="${item.id}">✕ Supprimer</button>

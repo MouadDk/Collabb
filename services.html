@@ -19,6 +19,7 @@
                 <a href="Home_Page_Logged_In.html" class="nav-link">Accueil</a>
                 <a href="services.html" class="nav-link">Services</a>
                 <a href="software.html" class="nav-link">Logiciels</a>
+                <a href="quote-requests.html" class="nav-link">Mes Devis</a>
             </div>
             <div class="nav-buttons">
                 <a href="cart.html" class="btn-header cart-btn">
@@ -218,6 +219,105 @@
             <p>© 2025 AMK IT Services. Tous droits réservés.</p>
         </div>
     </footer>
+
+    <!-- Quote Request Modal -->
+    <div class="quote-modal-overlay" id="quoteModal" style="display: none;">
+        <div class="quote-modal">
+            <div class="quote-modal-header">
+                <h2>Demander un Devis</h2>
+                <button class="quote-modal-close" onclick="closeQuoteModal()">✕</button>
+            </div>
+            <div class="quote-modal-body">
+                <div class="quote-item-info" id="quoteItemInfo">
+                    <!-- Item info will be inserted here -->
+                </div>
+                
+                <form id="quoteRequestForm" class="quote-form">
+                    <div class="form-section">
+                        <h3>Informations de l'entreprise</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="quote-company">Nom de l'entreprise <span class="required">*</span></label>
+                                <input type="text" id="quote-company" required minlength="2" placeholder="Votre entreprise">
+                                <span class="validation-icon"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="quote-company-size">Taille de l'entreprise <span class="required">*</span></label>
+                                <select id="quote-company-size" required>
+                                    <option value="">Sélectionner</option>
+                                    <option value="1-10">1-10 employés</option>
+                                    <option value="11-50">11-50 employés</option>
+                                    <option value="51-200">51-200 employés</option>
+                                    <option value="201-500">201-500 employés</option>
+                                    <option value="500+">500+ employés</option>
+                                </select>
+                                <span class="validation-icon"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Contact</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="quote-contact">Personne de contact <span class="required">*</span></label>
+                                <input type="text" id="quote-contact" required minlength="2" placeholder="Nom complet">
+                                <span class="validation-icon"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="quote-email">Email <span class="required">*</span></label>
+                                <input type="email" id="quote-email" required placeholder="email@entreprise.com">
+                                <span class="validation-icon"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="quote-phone">Téléphone <span class="required">*</span></label>
+                                <input type="tel" id="quote-phone" required placeholder="+33 6 12 34 56 78">
+                                <span class="validation-icon"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="quote-date">Date de contact préférée</label>
+                                <input type="date" id="quote-date" min="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Détails du projet</h3>
+                        <div class="form-group">
+                            <label for="quote-description">Description du projet <span class="required">*</span></label>
+                            <textarea id="quote-description" required minlength="50" rows="4" placeholder="Décrivez votre projet et vos objectifs..."></textarea>
+                            <div class="char-counter"><span id="desc-count">0</span>/500 caractères</div>
+                            <span class="validation-icon"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="quote-requirements">Exigences spécifiques <span class="required">*</span></label>
+                            <textarea id="quote-requirements" required minlength="20" rows="3" placeholder="Listez vos exigences techniques ou fonctionnelles..."></textarea>
+                            <div class="char-counter"><span id="req-count">0</span>/300 caractères</div>
+                            <span class="validation-icon"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="quote-budget">Budget estimé (optionnel)</label>
+                            <select id="quote-budget">
+                                <option value="">Sélectionner</option>
+                                <option value="< 5000€">Moins de 5 000€</option>
+                                <option value="5000€ - 10000€">5 000€ - 10 000€</option>
+                                <option value="10000€ - 25000€">10 000€ - 25 000€</option>
+                                <option value="25000€ - 50000€">25 000€ - 50 000€</option>
+                                <option value="> 50000€">Plus de 50 000€</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="quote-modal-actions">
+                        <button type="button" class="btn-cancel" onclick="closeQuoteModal()">Annuler</button>
+                        <button type="submit" class="btn-submit">Envoyer la demande</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <link rel="stylesheet" href="footer.css">
     <script src="script.js"></script>
