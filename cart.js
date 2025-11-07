@@ -262,9 +262,8 @@ document.addEventListener('DOMContentLoaded', () => {
         checkoutButton.addEventListener('click', () => {
             const cart = getCart();
             if (cart.length > 0) {
-                const totalElement = document.getElementById('cart-total');
-                const total = totalElement ? totalElement.textContent : 'N/A';
-                alert('Fonctionnalité de paiement à venir! Total: ' + total);
+                // Redirect to checkout page
+                window.location.href = 'checkout.html';
             } else {
                 alert('Votre panier est vide!');
             }

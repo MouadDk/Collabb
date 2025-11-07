@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement - AMK IT Services</title>
+    <link rel="stylesheet" href="checkout.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="Home_Page_Logged_In.html">
+                    <img src="images/logo.png" alt="AMK IT Services" class="nav-logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="Home_Page_Logged_In.html" class="nav-link">Accueil</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="software.html" class="nav-link">Logiciels</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="cart.html" class="btn-header cart-btn">
+                    <span>🛒</span>
+                    <span>Panier</span>
+                    <span class="cart-count"></span>
+                </a>
+                <div class="user-menu">
+                    <div class="user-info" id="userInfo">
+                        <span class="user-avatar">👤</span>
+                        <span class="user-name" id="userName"></span>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="#" class="dropdown-item" id="logoutBtn">Déconnexion</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="checkout-container">
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step" data-step="1">
+                    <div class="step-number active">1</div>
+                    <div class="step-label">Confirmation</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Paiement</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Confirmation</div>
+                </div>
+            </div>
+
+            <!-- Step 1: Cart & Installation Confirmation -->
+            <div class="checkout-step active" id="step-1">
+                <h2>Confirmation du Panier</h2>
+                <div class="step-content">
+                    <div class="cart-review">
+                        <h3>Articles dans votre panier</h3>
+                        <div id="checkout-cart-items"></div>
+                        <div class="cart-totals">
+                            <div class="total-row">
+                                <span>Sous-total:</span>
+                                <span id="checkout-subtotal">0.00€</span>
+                            </div>
+                            <div class="total-row">
+                                <span>TVA (20%):</span>
+                                <span id="checkout-tax">0.00€</span>
+                            </div>
+                            <div class="total-row final">
+                                <span>Total:</span>
+                                <span id="checkout-total">0.00€</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="installation-addresses" id="installation-addresses">
+                        <h3>Adresses d'installation</h3>
+                        <div id="installation-list"></div>
+                    </div>
+
+                    <div class="step-actions">
+                        <button class="btn-secondary" onclick="window.location.href='cart.html'">Retour au panier</button>
+                        <button class="btn-primary" onclick="goToStep(2)">Continuer vers le paiement</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Payment -->
+            <div class="checkout-step" id="step-2">
+                <h2>Paiement</h2>
+                <div class="step-content">
+                    <div class="payment-methods">
+                        <h3>Choisissez votre méthode de paiement</h3>
+                        <div class="payment-options">
+                            <div class="payment-option" data-method="card">
+                                <input type="radio" name="payment-method" id="payment-card" value="card" checked>
+                                <label for="payment-card">
+                                    <span class="payment-icon">💳</span>
+                                    <span>Carte bancaire</span>
+                                </label>
+                            </div>
+                            <div class="payment-option" data-method="paypal">
+                                <input type="radio" name="payment-method" id="payment-paypal" value="paypal">
+                                <label for="payment-paypal">
+                                    <img src="images/pay-pal.png" alt="PayPal" class="payment-logo">
+                                    <span>PayPal</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Payment Form -->
+                    <div class="payment-form" id="card-form">
+                        <h3>Informations de la carte</h3>
+                        <div class="form-group">
+                            <label for="card-number">Numéro de carte</label>
+                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="card-expiry">Date d'expiration</label>
+                                <input type="text" id="card-expiry" placeholder="MM/AA" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="card-cvv">CVV</label>
+                                <input type="text" id="card-cvv" placeholder="123" maxlength="4">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-name">Nom sur la carte</label>
+                            <input type="text" id="card-name" placeholder="Nom complet">
+                        </div>
+                    </div>
+
+                    <!-- PayPal Form -->
+                    <div class="payment-form" id="paypal-form" style="display: none;">
+                        <h3>Connexion PayPal</h3>
+                        <div class="paypal-info">
+                            <p>Vous serez redirigé vers PayPal pour finaliser votre paiement.</p>
+                            <div class="paypal-button">
+                                <button type="button" class="btn-paypal" onclick="processPayPalPayment()">
+                                    <img src="images/pay-pal.png" alt="PayPal" class="paypal-logo">
+                                    <span>Payer avec PayPal</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-actions">
+                        <button class="btn-secondary" onclick="goToStep(1)">Retour</button>
+                        <button class="btn-primary" id="process-payment-btn" onclick="processPayment()">Payer maintenant</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Confirmation -->
+            <div class="checkout-step" id="step-3">
+                <h2>Commande Confirmée</h2>
+                <div class="step-content">
+                    <div class="confirmation-message">
+                        <div class="success-icon">✓</div>
+                        <h3>Votre commande a été confirmée !</h3>
+                        <p class="order-number">Numéro de commande: <strong id="order-number"></strong></p>
+                        <p>Un email de confirmation vous a été envoyé.</p>
+                    </div>
+
+                    <div class="order-summary" id="order-summary">
+                        <!-- Order details will be inserted here -->
+                    </div>
+
+                    <div class="receipt-section">
+                        <h3>Télécharger votre reçu</h3>
+                        <button class="btn-primary" onclick="downloadReceipt()">
+                            <span>📄</span>
+                            <span>Télécharger le reçu PDF</span>
+                        </button>
+                    </div>
+
+                    <div class="step-actions">
+                        <button class="btn-primary" onclick="window.location.href='Home_Page_Logged_In.html'">Retour à l'accueil</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos de nous</h3>
+                <p>AMK IT Services est votre partenaire de confiance pour tous vos besoins en services informatiques, offrant des solutions innovantes et personnalisées depuis 2020.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">
+                        <img src="images/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="images/twitter.png" alt="Twitter">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="images/linkedin.png" alt="LinkedIn">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="images/instagram.png" alt="Instagram">
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Nos Services</h3>
+                <ul class="footer-links">
+                    <li><a href="services.html">Services IT</a></li>
+                    <li><a href="software.html">Logiciels</a></li>
+                    <li><a href="#">Support Technique</a></li>
+                    <li><a href="#">Formation</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Liens Utiles</h3>
+                <ul class="footer-links">
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Contactez-nous</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>123 Avenue de l'Innovation</p>
+                <p>75001 Paris, France</p>
+                <p>Email: contact@amkit.com</p>
+                <p>Tél: +33 1 23 45 67 89</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 AMK IT Services. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <link rel="stylesheet" href="footer.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+    <script src="checkout.js"></script>
+</body>
+</html>
+
