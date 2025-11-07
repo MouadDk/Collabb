@@ -7,25 +7,47 @@
     <link rel="stylesheet" href="Login_page.css"> <!-- Reusing the same CSS for now -->
 </head>
 <body>
-    <div class="container">
-        <div class="form-container" id="signup-form-container">
-            <h2>Sign Up</h2>
-            <form id="signup-form">
-                <div class="input-group">
-                    <label for="signup-username">Username</label>
-                    <input type="text" id="signup-username" required>
+    <div class="auth-wrapper">
+        <div class="container">
+            <div class="auth-brand">
+                <img src="images/logo.png" alt="AMK IT Services" class="auth-logo">
+                <h1>Rejoignez AMK IT Services</h1>
+                <p>Créez un compte en quelques secondes et pilotez vos projets IT en toute sérénité.</p>
+                <div class="auth-highlights">
+                    <span class="badge">Onboarding rapide</span>
+                    <span class="badge">Gestion centralisée</span>
+                    <span class="badge">Sécurité avancée</span>
                 </div>
-                <div class="input-group">
-                    <label for="signup-password">Password</label>
-                    <input type="password" id="signup-password" required>
+            </div>
+
+            <div class="form-container" id="signup-form-container">
+                <h2>Créer un compte</h2>
+                <form id="signup-form">
+                    <div class="input-group">
+                        <label for="signup-username">Nom et prénom</label>
+                        <input type="text" id="signup-username" placeholder="Ex. Marie Dupont" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="signup-email">Adresse e-mail professionnelle</label>
+                        <input type="email" id="signup-email" placeholder="prenom.nom@entreprise.com" required>
+                    </div>
+                    <div class="input-group split">
+                        <div>
+                            <label for="signup-password">Mot de passe</label>
+                            <input type="password" id="signup-password" placeholder="••••••••" required>
+                        </div>
+                        <div>
+                            <label for="signup-confirm-password">Confirmer</label>
+                            <input type="password" id="signup-confirm-password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                    <div class="password-hint">8 caractères minimum, incluant une majuscule et un chiffre.</div>
+                    <button type="submit">Créer mon espace</button>
+                </form>
+                <div class="form-footer">
+                    <p>Déjà inscrit ? <a href="Login_page.html" id="show-login">Se connecter</a></p>
                 </div>
-                <div class="input-group">
-                    <label for="signup-confirm-password">Confirm Password</label>
-                    <input type="password" id="signup-confirm-password" required>
-                </div>
-                <button type="submit">Sign Up</button>
-            </form>
-            <p>Already have an account? <a href="Login_page.html" id="show-login">Login</a></p>
+            </div>
         </div>
     </div>
     

@@ -7,23 +7,38 @@
     <link rel="stylesheet" href="Login_page.css">
 </head>
 <body>
-    <div class="container">
-        <div class="form-container" id="login-form-container">
-            <h2>Login</h2>
-            <form id="login-form">
-                <div class="input-group">
-                    <label for="login-username">Username</label>
-                    <input type="text" id="login-username" required>
+    <div class="auth-wrapper">
+        <div class="container">
+            <div class="auth-brand">
+                <img src="images/logo.png" alt="AMK IT Services" class="auth-logo">
+                <h1>AMK IT Services</h1>
+                <p>Connexion sécurisée pour accéder à votre espace client.</p>
+                <div class="auth-highlights">
+                    <span class="badge">Support 24/7</span>
+                    <span class="badge">Experts certifiés</span>
+                    <span class="badge">Plateforme cloud</span>
                 </div>
-                <div class="input-group">
-                    <label for="login-password">Password</label>
-                    <input type="password" id="login-password" required>
-                </div>
-                <button type="submit">Login</button>
-            </form>
-            <p>Don't have an account? <a href="sign_up.html">Sign Up</a></p>
-        </div>
+            </div>
 
+            <div class="form-container" id="login-form-container">
+                <h2>Connexion</h2>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="login-username">Adresse e-mail</label>
+                        <input type="text" id="login-username" placeholder="prenom.nom@entreprise.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Mot de passe</label>
+                        <input type="password" id="login-password" placeholder="••••••••" required>
+                        <a class="input-helper" href="#">Mot de passe oublié ?</a>
+                    </div>
+                    <button type="submit">Se connecter</button>
+                </form>
+                <div class="form-footer">
+                    <p>Pas encore de compte ? <a href="sign_up.html">Créer un compte</a></p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
