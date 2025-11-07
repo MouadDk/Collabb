@@ -516,7 +516,7 @@ function loadStep3() {
     `;
 }
 
-// Download receipt
+// Download receipt with enhanced features
 function downloadReceipt() {
     if (!orderData) return;
 
@@ -525,121 +525,606 @@ function downloadReceipt() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
-        // Company name and date
-        doc.setFontSize(20);
-        doc.text('AMK IT Services', 105, 20, { align: 'center' });
-        doc.setFontSize(12);
-        doc.text(`Date: ${orderData.date}`, 105, 30, { align: 'center' });
-        doc.text(`Numéro de commande: ${orderData.orderNumber}`, 105, 37, { align: 'center' });
-
-        // Customer info
-        doc.setFontSize(14);
-        doc.text(`Client: ${orderData.customerName}`, 20, 50);
-
-        // Table header
-        let yPos = 65;
-        doc.setFontSize(10);
+        // Add company branding header with background
         doc.setFillColor(26, 31, 46);
-        doc.rect(20, yPos - 5, 170, 8, 'F');
+        doc.rect(0, 0, 210, 45, 'F');
+        
+        // Company name
+        doc.setFontSize(24);
+        doc.setTextColor(255, 215, 0);
+        doc.setFont(undefined, 'bold');
+        doc.text('AMK IT Services', 105, 20, { align: 'center' });
+        
+        // Receipt title
+        doc.setFontSize(14);
         doc.setTextColor(255, 255, 255);
+        doc.setFont(undefined, 'normal');
+        doc.text('REÇU DE PAIEMENT', 105, 30, { align: 'center' });
+        
+        // Order number and date
+        doc.setFontSize(10);
+        doc.text(`N° ${orderData.orderNumber}`, 105, 38, { align: 'center' });
+
+        // Reset text color
+        doc.setTextColor(0, 0, 0);
+
+        // Customer and order info section
+        let yPos = 55;
+        doc.setFontSize(11);
+        doc.setFont(undefined, 'bold');
+        doc.text('Informations client:', 20, yPos);
+        doc.setFont(undefined, 'normal');
+        yPos += 7;
+        doc.setFontSize(10);
+        doc.text(`Client: ${orderData.customerName}`, 20, yPos);
+        yPos += 6;
+        doc.text(`Date: ${orderData.date}`, 20, yPos);
+        yPos += 6;
+        doc.text(`Statut: Payé`, 20, yPos);
+        
+        // Payment method
+        yPos += 6;
+        const paymentMethod = document.querySelector('input[name="payment-method"]:checked')?.value || 'card';
+        doc.text(`Méthode de paiement: ${paymentMethod === 'card' ? 'Carte bancaire' : 'PayPal'}`, 20, yPos);
+
+        // Items table
+        yPos += 15;
+        doc.setFontSize(11);
+        doc.setFont(undefined, 'bold');
+        doc.text('Détails de la commande:', 20, yPos);
+        
+        yPos += 8;
+        doc.setFontSize(9);
+        doc.setFillColor(240, 240, 240);
+        doc.rect(20, yPos - 5, 170, 7, 'F');
+        doc.setTextColor(26, 31, 46);
         doc.text('Article', 22, yPos);
-        doc.text('Qté', 100, yPos);
-        doc.text('Prix unit.', 120, yPos);
-        doc.text('Total', 160, yPos);
+        doc.text('Qté', 110, yPos);
+        doc.text('Prix unit.', 130, yPos);
+        doc.text('Total', 165, yPos);
 
         // Table rows
         doc.setTextColor(0, 0, 0);
+        doc.setFont(undefined, 'normal');
         yPos += 8;
-        orderData.items.forEach(item => {
-            const itemName = item.icon ? `${item.icon} ${item.name.substring(0, 27)}` : item.name.substring(0, 30);
+        
+        orderData.items.forEach((item, index) => {
+            if (yPos > 250) {
+                doc.addPage();
+                yPos = 20;
+            }
+            
+            const itemName = item.name.substring(0, 35);
             doc.text(itemName, 22, yPos);
-            doc.text(item.quantity.toString(), 100, yPos);
-            doc.text(item.price.toFixed(2) + '€', 120, yPos);
-            doc.text(item.total.toFixed(2) + '€', 160, yPos);
-            yPos += 7;
+            doc.text(item.quantity.toString(), 110, yPos);
+            doc.text(item.price.toFixed(2) + '€', 130, yPos);
+            doc.text(item.total.toFixed(2) + '€', 165, yPos);
+            yPos += 6;
+            
+            // Add subtle line between items
+            if (index < orderData.items.length - 1) {
+                doc.setDrawColor(230, 230, 230);
+                doc.line(20, yPos, 190, yPos);
+                yPos += 2;
+            }
         });
 
-        // Totals
-        yPos += 5;
-        doc.setFontSize(11);
-        doc.text('Sous-total:', 120, yPos);
-        doc.text(orderData.subtotal.toFixed(2) + '€', 160, yPos);
+        // Totals section
+        yPos += 8;
+        doc.setDrawColor(26, 31, 46);
+        doc.setLineWidth(0.5);
+        doc.line(120, yPos, 190, yPos);
         yPos += 7;
-        doc.text('TVA (20%):', 120, yPos);
-        doc.text(orderData.tax.toFixed(2) + '€', 160, yPos);
-        yPos += 7;
+        
+        doc.setFontSize(10);
+        doc.text('Sous-total:', 130, yPos);
+        doc.text(orderData.subtotal.toFixed(2) + '€', 165, yPos);
+        yPos += 6;
+        
+        // Show discount if applied
+        if (orderData.discount > 0) {
+            doc.setTextColor(0, 168, 107);
+            doc.text(`Réduction (${orderData.promoCode}):`, 130, yPos);
+            doc.text(`-${orderData.discount.toFixed(2)}€`, 165, yPos);
+            doc.setTextColor(0, 0, 0);
+            yPos += 6;
+        }
+        
+        doc.text('TVA (20%):', 130, yPos);
+        doc.text(orderData.tax.toFixed(2) + '€', 165, yPos);
+        yPos += 8;
+        
+        // Total with highlight
+        doc.setFillColor(255, 215, 0);
+        doc.rect(120, yPos - 5, 70, 10, 'F');
         doc.setFontSize(12);
         doc.setFont(undefined, 'bold');
-        doc.text('Total:', 120, yPos);
-        doc.text(orderData.total.toFixed(2) + '€', 160, yPos);
+        doc.setTextColor(26, 31, 46);
+        doc.text('TOTAL:', 130, yPos);
+        doc.text(orderData.total.toFixed(2) + '€', 165, yPos);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont(undefined, 'normal');
 
         // Installation addresses
         const installationItems = orderData.items.filter(item => item.installationInfo);
         if (installationItems.length > 0) {
             yPos += 15;
+            if (yPos > 240) {
+                doc.addPage();
+                yPos = 20;
+            }
+            
             doc.setFontSize(11);
             doc.setFont(undefined, 'bold');
             doc.text('Adresses d\'installation:', 20, yPos);
-            yPos += 7;
+            yPos += 8;
             doc.setFont(undefined, 'normal');
+            doc.setFontSize(9);
+            
             installationItems.forEach(item => {
-                doc.setFontSize(10);
+                if (yPos > 270) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                doc.setFont(undefined, 'bold');
                 doc.text(`${item.name}:`, 22, yPos);
                 yPos += 5;
-                doc.text(item.installationInfo.address, 25, yPos);
+                doc.setFont(undefined, 'normal');
+                doc.text(`Adresse: ${item.installationInfo.address}`, 25, yPos);
+                yPos += 5;
+                doc.text(`Date: ${formatDate(item.installationInfo.date)} à ${item.installationInfo.time}`, 25, yPos);
+                yPos += 5;
+                doc.text(`Contact: ${item.installationInfo.contactName} - ${item.installationInfo.contactPhone}`, 25, yPos);
                 yPos += 8;
             });
         }
 
-        // Footer
+        // Add QR code placeholder (text-based for now)
+        yPos += 10;
+        if (yPos > 250) {
+            doc.addPage();
+            yPos = 20;
+        }
+        
+        doc.setFontSize(9);
+        doc.setFont(undefined, 'bold');
+        doc.text('Code de suivi:', 20, yPos);
+        yPos += 6;
+        doc.setFont(undefined, 'normal');
+        doc.setFillColor(240, 240, 240);
+        doc.rect(20, yPos - 4, 80, 10, 'F');
+        doc.setFontSize(10);
+        doc.text(orderData.orderNumber, 22, yPos);
+
+        // Terms and conditions
+        yPos += 15;
+        if (yPos > 260) {
+            doc.addPage();
+            yPos = 20;
+        }
+        
         doc.setFontSize(8);
-        doc.setTextColor(128, 128, 128);
-        doc.text('AMK IT Services - 123 Avenue de l\'Innovation, 75001 Paris, France', 105, 280, { align: 'center' });
-        doc.text('Email: contact@amkit.com - Tél: +33 1 23 45 67 89', 105, 285, { align: 'center' });
+        doc.setFont(undefined, 'bold');
+        doc.text('Conditions générales:', 20, yPos);
+        yPos += 5;
+        doc.setFont(undefined, 'normal');
+        doc.setTextColor(100, 100, 100);
+        const terms = [
+            '• Garantie satisfait ou remboursé de 30 jours',
+            '• Support technique disponible 24/7',
+            '• Tous les prix incluent la TVA',
+            '• Paiement sécurisé et crypté'
+        ];
+        terms.forEach(term => {
+            doc.text(term, 20, yPos);
+            yPos += 4;
+        });
+
+        // Footer with company info
+        doc.setFillColor(26, 31, 46);
+        doc.rect(0, 280, 210, 17, 'F');
+        doc.setFontSize(8);
+        doc.setTextColor(255, 255, 255);
+        doc.text('AMK IT Services - 123 Avenue de l\'Innovation, 75001 Paris, France', 105, 287, { align: 'center' });
+        doc.text('Email: contact@amkit.com - Tél: +33 1 23 45 67 89', 105, 292, { align: 'center' });
 
         // Save PDF
         doc.save(`Reçu_${orderData.orderNumber}.pdf`);
+        
+        // Show success message
+        showNotification('✓ Reçu téléchargé avec succès!', 'success');
     } else {
-        // Fallback: create text receipt
-        let receiptText = `AMK IT SERVICES\n`;
-        receiptText += `========================\n\n`;
+        // Enhanced fallback: create detailed text receipt
+        let receiptText = `╔════════════════════════════════════════════════════════╗\n`;
+        receiptText += `║           AMK IT SERVICES - REÇU DE PAIEMENT          ║\n`;
+        receiptText += `╚════════════════════════════════════════════════════════╝\n\n`;
         receiptText += `Date: ${orderData.date}\n`;
         receiptText += `Numéro de commande: ${orderData.orderNumber}\n`;
-        receiptText += `Client: ${orderData.customerName}\n\n`;
+        receiptText += `Client: ${orderData.customerName}\n`;
+        receiptText += `Statut: Payé\n\n`;
+        receiptText += `════════════════════════════════════════════════════════\n`;
         receiptText += `ARTICLES:\n`;
-        receiptText += `------------------------\n`;
+        receiptText += `════════════════════════════════════════════════════════\n\n`;
+        
         orderData.items.forEach(item => {
             const itemName = item.icon ? `${item.icon} ${item.name}` : item.name;
-            receiptText += `${itemName} - Qté: ${item.quantity} - Prix unitaire: ${item.price.toFixed(2)}€ - Total: ${item.total.toFixed(2)}€\n`;
+            receiptText += `${itemName}\n`;
+            receiptText += `  Quantité: ${item.quantity} x ${item.price.toFixed(2)}€ = ${item.total.toFixed(2)}€\n\n`;
         });
-        receiptText += `\nSous-total: ${orderData.subtotal.toFixed(2)}€\n`;
+        
+        receiptText += `────────────────────────────────────────────────────────\n`;
+        receiptText += `Sous-total: ${orderData.subtotal.toFixed(2)}€\n`;
+        
+        if (orderData.discount > 0) {
+            receiptText += `Réduction (${orderData.promoCode}): -${orderData.discount.toFixed(2)}€\n`;
+        }
+        
         receiptText += `TVA (20%): ${orderData.tax.toFixed(2)}€\n`;
-        receiptText += `TOTAL: ${orderData.total.toFixed(2)}€\n\n`;
+        receiptText += `════════════════════════════════════════════════════════\n`;
+        receiptText += `TOTAL: ${orderData.total.toFixed(2)}€\n`;
+        receiptText += `════════════════════════════════════════════════════════\n\n`;
         
         if (orderData.items.some(item => item.installationInfo)) {
             receiptText += `ADRESSES D'INSTALLATION:\n`;
-            receiptText += `------------------------\n`;
+            receiptText += `────────────────────────────────────────────────────────\n`;
             orderData.items.filter(item => item.installationInfo).forEach(item => {
-                receiptText += `${item.name}: ${item.installationInfo.address}\n`;
+                receiptText += `\n${item.name}:\n`;
+                receiptText += `  Adresse: ${item.installationInfo.address}\n`;
+                receiptText += `  Date: ${formatDate(item.installationInfo.date)}\n`;
+                receiptText += `  Heure: ${item.installationInfo.time}\n`;
+                receiptText += `  Contact: ${item.installationInfo.contactName}\n`;
+                receiptText += `  Téléphone: ${item.installationInfo.contactPhone}\n`;
             });
+            receiptText += `\n`;
         }
+        
+        receiptText += `\n════════════════════════════════════════════════════════\n`;
+        receiptText += `Merci pour votre confiance!\n`;
+        receiptText += `AMK IT Services - contact@amkit.com - +33 1 23 45 67 89\n`;
+        receiptText += `════════════════════════════════════════════════════════\n`;
 
         // Create blob and download
-        const blob = new Blob([receiptText], { type: 'text/plain' });
+        const blob = new Blob([receiptText], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
         a.download = `Reçu_${orderData.orderNumber}.txt`;
         a.click();
         URL.revokeObjectURL(url);
+        
+        showNotification('✓ Reçu téléchargé avec succès!', 'success');
     }
+}
+
+// Print receipt
+function printReceipt() {
+    if (!orderData) return;
+    
+    // Create a printable version
+    const printWindow = window.open('', '_blank');
+    const printContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Reçu - ${orderData.orderNumber}</title>
+            <style>
+                @media print {
+                    @page { margin: 1cm; }
+                    body { margin: 0; }
+                }
+                body {
+                    font-family: 'Arial', sans-serif;
+                    max-width: 800px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    color: #1a1f2e;
+                }
+                .header {
+                    background: linear-gradient(135deg, #1a1f2e 0%, #2d3748 100%);
+                    color: white;
+                    padding: 30px;
+                    text-align: center;
+                    border-radius: 10px 10px 0 0;
+                }
+                .header h1 {
+                    margin: 0;
+                    color: #ffd700;
+                    font-size: 28px;
+                }
+                .header h2 {
+                    margin: 10px 0 0 0;
+                    font-size: 16px;
+                    font-weight: normal;
+                }
+                .order-info {
+                    background: #f8f9fa;
+                    padding: 20px;
+                    margin: 20px 0;
+                    border-radius: 8px;
+                }
+                .order-info p {
+                    margin: 8px 0;
+                }
+                .order-info strong {
+                    color: #1a1f2e;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                }
+                thead {
+                    background: #1a1f2e;
+                    color: white;
+                }
+                th, td {
+                    padding: 12px;
+                    text-align: left;
+                    border-bottom: 1px solid #e0e0e0;
+                }
+                th {
+                    font-weight: 600;
+                }
+                .totals {
+                    margin-top: 20px;
+                    text-align: right;
+                }
+                .totals p {
+                    margin: 8px 0;
+                    font-size: 14px;
+                }
+                .total-final {
+                    background: #ffd700;
+                    padding: 15px;
+                    border-radius: 8px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: #1a1f2e;
+                    margin-top: 10px;
+                }
+                .installation-section {
+                    margin: 30px 0;
+                    padding: 20px;
+                    background: #f0f9ff;
+                    border-left: 4px solid #ffd700;
+                    border-radius: 8px;
+                }
+                .installation-item {
+                    margin: 15px 0;
+                }
+                .footer {
+                    margin-top: 40px;
+                    padding: 20px;
+                    background: #1a1f2e;
+                    color: white;
+                    text-align: center;
+                    border-radius: 0 0 10px 10px;
+                    font-size: 12px;
+                }
+                .terms {
+                    margin: 30px 0;
+                    padding: 15px;
+                    background: #f8f9fa;
+                    border-radius: 8px;
+                    font-size: 12px;
+                    color: #666;
+                }
+                .terms ul {
+                    margin: 10px 0;
+                    padding-left: 20px;
+                }
+                .terms li {
+                    margin: 5px 0;
+                }
+                .discount-row {
+                    color: #00a86b;
+                }
+                @media print {
+                    .no-print { display: none; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>AMK IT Services</h1>
+                <h2>REÇU DE PAIEMENT</h2>
+                <p style="margin-top: 10px;">N° ${orderData.orderNumber}</p>
+            </div>
+            
+            <div class="order-info">
+                <p><strong>Client:</strong> ${orderData.customerName}</p>
+                <p><strong>Date:</strong> ${orderData.date}</p>
+                <p><strong>Statut:</strong> <span style="color: #00a86b;">✓ Payé</span></p>
+            </div>
+            
+            <h3>Détails de la commande</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Article</th>
+                        <th>Quantité</th>
+                        <th>Prix unitaire</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${orderData.items.map(item => `
+                        <tr>
+                            <td>${item.icon ? item.icon + ' ' : ''}${item.name}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.price.toFixed(2)}€</td>
+                            <td>${item.total.toFixed(2)}€</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+            
+            <div class="totals">
+                <p>Sous-total: <strong>${orderData.subtotal.toFixed(2)}€</strong></p>
+                ${orderData.discount > 0 ? `
+                    <p class="discount-row">Réduction (${orderData.promoCode}): <strong>-${orderData.discount.toFixed(2)}€</strong></p>
+                ` : ''}
+                <p>TVA (20%): <strong>${orderData.tax.toFixed(2)}€</strong></p>
+                <div class="total-final">
+                    TOTAL: ${orderData.total.toFixed(2)}€
+                </div>
+            </div>
+            
+            ${orderData.items.some(item => item.installationInfo) ? `
+                <div class="installation-section">
+                    <h3>Adresses d'installation</h3>
+                    ${orderData.items.filter(item => item.installationInfo).map(item => `
+                        <div class="installation-item">
+                            <p><strong>${item.name}</strong></p>
+                            <p>Adresse: ${item.installationInfo.address}</p>
+                            <p>Date: ${formatDate(item.installationInfo.date)} à ${item.installationInfo.time}</p>
+                            <p>Contact: ${item.installationInfo.contactName} - ${item.installationInfo.contactPhone}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            ` : ''}
+            
+            <div class="terms">
+                <h4>Conditions générales</h4>
+                <ul>
+                    <li>Garantie satisfait ou remboursé de 30 jours</li>
+                    <li>Support technique disponible 24/7</li>
+                    <li>Tous les prix incluent la TVA</li>
+                    <li>Paiement sécurisé et crypté</li>
+                </ul>
+            </div>
+            
+            <div class="footer">
+                <p>AMK IT Services - 123 Avenue de l'Innovation, 75001 Paris, France</p>
+                <p>Email: contact@amkit.com - Tél: +33 1 23 45 67 89</p>
+                <p style="margin-top: 10px;">Merci pour votre confiance!</p>
+            </div>
+            
+            <div class="no-print" style="text-align: center; margin: 20px 0;">
+                <button onclick="window.print()" style="padding: 12px 24px; background: #ffd700; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px;">
+                    🖨️ Imprimer
+                </button>
+                <button onclick="window.close()" style="padding: 12px 24px; background: #e0e0e0; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-left: 10px; font-size: 14px;">
+                    Fermer
+                </button>
+            </div>
+        </body>
+        </html>
+    `;
+    
+    printWindow.document.write(printContent);
+    printWindow.document.close();
 }
 
 // Email receipt
 function emailReceipt() {
     if (!orderData) return;
     
-    alert(`Un reçu a été envoyé à l'adresse email associée à votre compte.\n\nNuméro de commande: ${orderData.orderNumber}`);
+    showNotification('📧 Un reçu a été envoyé à votre adresse email', 'success');
+    
+    // Simulate email sending
+    setTimeout(() => {
+        alert(`Reçu envoyé avec succès!\n\nNuméro de commande: ${orderData.orderNumber}\nUn email de confirmation a été envoyé à l'adresse associée à votre compte.`);
+    }, 500);
+}
+
+// Share receipt
+function shareReceipt() {
+    if (!orderData) return;
+    
+    const shareText = `Commande AMK IT Services\nN° ${orderData.orderNumber}\nTotal: ${orderData.total.toFixed(2)}€\nDate: ${orderData.date}`;
+    
+    // Check if Web Share API is available
+    if (navigator.share) {
+        navigator.share({
+            title: 'Reçu AMK IT Services',
+            text: shareText,
+            url: window.location.href
+        }).then(() => {
+            showNotification('✓ Reçu partagé avec succès!', 'success');
+        }).catch((error) => {
+            console.log('Error sharing:', error);
+            fallbackShare(shareText);
+        });
+    } else {
+        fallbackShare(shareText);
+    }
+}
+
+// Fallback share method
+function fallbackShare(text) {
+    // Copy to clipboard
+    navigator.clipboard.writeText(text).then(() => {
+        showNotification('✓ Détails de la commande copiés dans le presse-papiers!', 'success');
+    }).catch(() => {
+        // Show share modal if clipboard fails
+        showShareModal(text);
+    });
+}
+
+// Show share modal
+function showShareModal(text) {
+    const modal = document.createElement('div');
+    modal.className = 'tracking-modal-overlay';
+    modal.innerHTML = `
+        <div class="tracking-modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>Partager le reçu</h2>
+                <button class="modal-close" onclick="this.closest('.tracking-modal-overlay').remove()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 15px; color: #666;">Partagez les détails de votre commande:</p>
+                <textarea readonly style="width: 100%; height: 150px; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-family: monospace; font-size: 12px; resize: none;">${text}</textarea>
+                <div style="display: flex; gap: 10px; margin-top: 15px; justify-content: center;">
+                    <button onclick="copyShareText(this)" class="btn-primary" style="flex: 1;">
+                        📋 Copier
+                    </button>
+                    <button onclick="this.closest('.tracking-modal-overlay').remove()" class="btn-secondary" style="flex: 1;">
+                        Fermer
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Copy share text
+function copyShareText(button) {
+    const textarea = button.closest('.modal-body').querySelector('textarea');
+    textarea.select();
+    document.execCommand('copy');
+    showNotification('✓ Copié dans le presse-papiers!', 'success');
+    button.closest('.tracking-modal-overlay').remove();
+}
+
+// Show notification helper
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? 'linear-gradient(135deg, #00d4ff, #00b8d4)' : 'linear-gradient(135deg, #ffd700, #ffed4e)'};
+        color: ${type === 'success' ? 'white' : '#1a1f2e'};
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        z-index: 10000;
+        font-weight: 600;
+        animation: slideInRight 0.3s ease;
+        max-width: 300px;
+    `;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
 }
 
 // Track order

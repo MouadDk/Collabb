@@ -683,23 +683,85 @@ nav {
 
 .receipt-section {
     text-align: center;
-    padding: 2rem;
-    background: white;
-    border-radius: 12px;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 16px;
     border: 2px dashed #e0e0e0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .receipt-section h3 {
     color: #1a1f2e;
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
 }
 
-.receipt-section button {
+.btn-receipt {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    margin: 0 auto;
+    gap: 0.5rem;
+    padding: 1.2rem 1rem;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1a1f2e;
+    min-width: 140px;
+}
+
+.btn-receipt:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-receipt.download {
+    border-color: #ffd700;
+}
+
+.btn-receipt.download:hover {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    border-color: #ffd700;
+}
+
+.btn-receipt.print {
+    border-color: #00d4ff;
+}
+
+.btn-receipt.print:hover {
+    background: linear-gradient(135deg, #00d4ff, #00b8d4);
+    color: white;
+    border-color: #00d4ff;
+}
+
+.btn-receipt.email {
+    border-color: #ff6b6b;
+}
+
+.btn-receipt.email:hover {
+    background: linear-gradient(135deg, #ff6b6b, #ff5252);
+    color: white;
+    border-color: #ff6b6b;
+}
+
+.btn-receipt.share {
+    border-color: #00a86b;
+}
+
+.btn-receipt.share:hover {
+    background: linear-gradient(135deg, #00a86b, #00c97a);
+    color: white;
+    border-color: #00a86b;
+}
+
+.receipt-icon {
+    font-size: 2rem;
+    display: block;
 }
 
 .order-item-name {
@@ -860,15 +922,12 @@ nav {
 
 /* Receipt Actions */
 .receipt-actions {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 1rem;
     justify-content: center;
-    flex-wrap: wrap;
-}
-
-.receipt-actions button {
-    flex: 1;
-    min-width: 200px;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 /* Order Tracking */
@@ -1105,6 +1164,20 @@ nav {
     .checkout-cart-item {
         flex-direction: column;
         text-align: center;
+    }
+    
+    .receipt-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .btn-receipt {
+        min-width: auto;
+        padding: 1rem 0.75rem;
+        font-size: 0.85rem;
+    }
+    
+    .receipt-icon {
+        font-size: 1.5rem;
     }
 }
 

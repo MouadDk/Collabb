@@ -204,15 +204,24 @@
                     </div>
 
                     <div class="receipt-section">
-                        <h3>Télécharger votre reçu</h3>
+                        <h3>Votre reçu</h3>
+                        <p style="color: #666; margin-bottom: 1.5rem; text-align: center;">Téléchargez, imprimez ou partagez votre reçu</p>
                         <div class="receipt-actions">
-                            <button class="btn-primary" onclick="downloadReceipt()">
-                                <span>📄</span>
-                                <span>Télécharger le reçu PDF</span>
+                            <button class="btn-receipt download" onclick="downloadReceipt()">
+                                <span class="receipt-icon">📄</span>
+                                <span>Télécharger PDF</span>
                             </button>
-                            <button class="btn-secondary" onclick="emailReceipt()">
-                                <span>📧</span>
+                            <button class="btn-receipt print" onclick="printReceipt()">
+                                <span class="receipt-icon">🖨️</span>
+                                <span>Imprimer</span>
+                            </button>
+                            <button class="btn-receipt email" onclick="emailReceipt()">
+                                <span class="receipt-icon">📧</span>
                                 <span>Envoyer par email</span>
+                            </button>
+                            <button class="btn-receipt share" onclick="shareReceipt()">
+                                <span class="receipt-icon">📤</span>
+                                <span>Partager</span>
                             </button>
                         </div>
                     </div>
