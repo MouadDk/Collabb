@@ -65,8 +65,16 @@ function updateCartDisplay() {
                     📍
                 </button>
             ` : '';
-            itemElement.innerHTML = `
+            
+            // Display icon if available, otherwise use image
+            const displayIcon = item.icon ? `
+                <div class="item-icon-display">${item.icon}</div>
+            ` : `
                 <img src="${item.image || 'https://via.placeholder.com/100x100'}" alt="${item.name}" class="item-image" onerror="this.src='https://via.placeholder.com/100x100'">
+            `;
+            
+            itemElement.innerHTML = `
+                ${displayIcon}
                 <div class="item-details">
                     <h3>${item.name}</h3>
                     <p>Prix unitaire: ${item.price.toFixed(2)}€</p>
@@ -117,6 +125,7 @@ function addToCart(item) {
             name: item.name,
             price: item.price || 0,
             image: item.image || 'https://via.placeholder.com/100x100',
+            icon: item.icon || null,
             quantity: 1 
         });
     }
