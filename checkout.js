@@ -1,6 +1,15 @@
 // Checkout Page JavaScript
 let currentStep = 1;
 let orderData = null;
+let appliedPromo = null;
+
+// Promo codes
+const promoCodes = {
+    'WELCOME10': { discount: 0.10, description: '10% de réduction' },
+    'SAVE20': { discount: 0.20, description: '20% de réduction' },
+    'FIRST50': { discount: 50, description: '50€ de réduction', type: 'fixed' },
+    'VIP15': { discount: 0.15, description: '15% de réduction' }
+};
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', () => {
@@ -84,7 +93,64 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.value = e.target.value.replace(/\D/g, '');
         });
     }
+
+    // Card type detection
+    const cardNumberInput2 = document.getElementById('card-number');
+    if (cardNumberInput2) {
+        cardNumberInput2.addEventListener('input', (e) => {
+            detectCardType(e.target.value);
+        });
+    }
 });
+
+// Detect card type
+function detectCardType(cardNumber) {
+    const cardTypeIcon = document.getElementById('card-type-icon');
+    if (!cardTypeIcon) return;
+
+    const number = cardNumber.replace(/\s/g, '');
+    
+    if (/^4/.test(number)) {
+        cardTypeIcon.textContent = 'VISA';
+        cardTypeIcon.className = 'card-type-icon visa';
+    } else if (/^5[1-5]/.test(number)) {
+        cardTypeIcon.textContent = 'MC';
+        cardTypeIcon.className = 'card-type-icon mastercard';
+    } else if (/^3[47]/.test(number)) {
+        cardTypeIcon.textContent = 'AMEX';
+        cardTypeIcon.className = 'card-type-icon amex';
+    } else {
+        cardTypeIcon.textContent = '';
+        cardTypeIcon.className = 'card-type-icon';
+    }
+}
+
+// Apply promo code
+function applyPromoCode() {
+    const promoInput = document.getElementById('promo-code');
+    const promoMessage = document.getElementById('promo-message');
+    const code = promoInput.value.trim().toUpperCase();
+
+    if (!code) {
+        promoMessage.textContent = 'Veuillez entrer un code promo';
+        promoMessage.className = 'promo-message error';
+        return;
+    }
+
+    if (promoCodes[code]) {
+        appliedPromo = { code: code, ...promoCodes[code] };
+        promoMessage.textContent = `✓ Code appliqué: ${appliedPromo.description}`;
+        promoMessage.className = 'promo-message success';
+        promoInput.disabled = true;
+        
+        // Recalculate totals
+        loadStep1();
+    } else {
+        promoMessage.textContent = '✗ Code promo invalide';
+        promoMessage.className = 'promo-message error';
+        appliedPromo = null;
+    }
+}
 
 // Get cart from localStorage
 function getCart() {
@@ -123,8 +189,15 @@ function loadStep1() {
         const itemTotal = (item.price || 0) * (item.quantity || 1);
         subtotal += itemTotal;
 
-        itemElement.innerHTML = `
+        // Display icon if available, otherwise use image
+        const displayIcon = item.icon ? `
+            <div class="checkout-item-icon">${item.icon}</div>
+        ` : `
             <img src="${item.image || 'https://via.placeholder.com/100x100'}" alt="${item.name}" class="checkout-item-image" onerror="this.src='https://via.placeholder.com/100x100'">
+        `;
+
+        itemElement.innerHTML = `
+            ${displayIcon}
             <div class="checkout-item-details">
                 <h4>${item.name}</h4>
                 <p>Quantité: ${item.quantity || 1}</p>
@@ -135,9 +208,29 @@ function loadStep1() {
         cartItemsContainer.appendChild(itemElement);
     });
 
-    // Calculate totals
-    const tax = subtotal * 0.20;
-    const total = subtotal + tax;
+    // Apply promo code discount
+    let discount = 0;
+    if (appliedPromo) {
+        if (appliedPromo.type === 'fixed') {
+            discount = appliedPromo.discount;
+        } else {
+            discount = subtotal * appliedPromo.discount;
+        }
+        
+        const discountRow = document.getElementById('discount-row');
+        const discountCode = document.getElementById('discount-code');
+        const discountAmount = document.getElementById('checkout-discount');
+        
+        if (discountRow && discountCode && discountAmount) {
+            discountRow.style.display = 'flex';
+            discountCode.textContent = appliedPromo.code;
+            discountAmount.textContent = `-${discount.toFixed(2)}€`;
+        }
+    }
+
+    const discountedSubtotal = subtotal - discount;
+    const tax = discountedSubtotal * 0.20;
+    const total = discountedSubtotal + tax;
 
     document.getElementById('checkout-subtotal').textContent = subtotal.toFixed(2) + '€';
     document.getElementById('checkout-tax').textContent = tax.toFixed(2) + '€';
@@ -303,8 +396,20 @@ function completeOrder() {
     cart.forEach(item => {
         subtotal += (item.price || 0) * (item.quantity || 1);
     });
-    const tax = subtotal * 0.20;
-    const total = subtotal + tax;
+    
+    // Apply discount
+    let discount = 0;
+    if (appliedPromo) {
+        if (appliedPromo.type === 'fixed') {
+            discount = appliedPromo.discount;
+        } else {
+            discount = subtotal * appliedPromo.discount;
+        }
+    }
+    
+    const discountedSubtotal = subtotal - discount;
+    const tax = discountedSubtotal * 0.20;
+    const total = discountedSubtotal + tax;
 
     // Store order data
     orderData = {
@@ -322,9 +427,12 @@ function completeOrder() {
             quantity: item.quantity || 1,
             price: item.price,
             total: (item.price || 0) * (item.quantity || 1),
+            icon: item.icon || null,
             installationInfo: item.installationInfo
         })),
         subtotal: subtotal,
+        discount: discount,
+        promoCode: appliedPromo ? appliedPromo.code : null,
         tax: tax,
         total: total
     };
@@ -361,7 +469,12 @@ function loadStep3() {
             <tbody>
                 ${orderData.items.map(item => `
                     <tr>
-                        <td>${item.name}</td>
+                        <td>
+                            <div class="order-item-name">
+                                ${item.icon ? `<span class="order-item-icon">${item.icon}</span>` : ''}
+                                <span>${item.name}</span>
+                            </div>
+                        </td>
                         <td>${item.quantity}</td>
                         <td>${item.price.toFixed(2)}€</td>
                         <td>${item.total.toFixed(2)}€</td>
@@ -373,6 +486,12 @@ function loadStep3() {
                     <td colspan="3"><strong>Sous-total</strong></td>
                     <td><strong>${orderData.subtotal.toFixed(2)}€</strong></td>
                 </tr>
+                ${orderData.discount > 0 ? `
+                <tr class="discount-row">
+                    <td colspan="3"><strong>Réduction (${orderData.promoCode})</strong></td>
+                    <td class="discount-amount"><strong>-${orderData.discount.toFixed(2)}€</strong></td>
+                </tr>
+                ` : ''}
                 <tr>
                     <td colspan="3"><strong>TVA (20%)</strong></td>
                     <td><strong>${orderData.tax.toFixed(2)}€</strong></td>
@@ -432,7 +551,8 @@ function downloadReceipt() {
         doc.setTextColor(0, 0, 0);
         yPos += 8;
         orderData.items.forEach(item => {
-            doc.text(item.name.substring(0, 30), 22, yPos);
+            const itemName = item.icon ? `${item.icon} ${item.name.substring(0, 27)}` : item.name.substring(0, 30);
+            doc.text(itemName, 22, yPos);
             doc.text(item.quantity.toString(), 100, yPos);
             doc.text(item.price.toFixed(2) + '€', 120, yPos);
             doc.text(item.total.toFixed(2) + '€', 160, yPos);
@@ -489,7 +609,8 @@ function downloadReceipt() {
         receiptText += `ARTICLES:\n`;
         receiptText += `------------------------\n`;
         orderData.items.forEach(item => {
-            receiptText += `${item.name} - Qté: ${item.quantity} - Prix unitaire: ${item.price.toFixed(2)}€ - Total: ${item.total.toFixed(2)}€\n`;
+            const itemName = item.icon ? `${item.icon} ${item.name}` : item.name;
+            receiptText += `${itemName} - Qté: ${item.quantity} - Prix unitaire: ${item.price.toFixed(2)}€ - Total: ${item.total.toFixed(2)}€\n`;
         });
         receiptText += `\nSous-total: ${orderData.subtotal.toFixed(2)}€\n`;
         receiptText += `TVA (20%): ${orderData.tax.toFixed(2)}€\n`;
@@ -512,6 +633,64 @@ function downloadReceipt() {
         a.click();
         URL.revokeObjectURL(url);
     }
+}
+
+// Email receipt
+function emailReceipt() {
+    if (!orderData) return;
+    
+    alert(`Un reçu a été envoyé à l'adresse email associée à votre compte.\n\nNuméro de commande: ${orderData.orderNumber}`);
+}
+
+// Track order
+function trackOrder() {
+    if (!orderData) return;
+    
+    // Create a simple tracking modal
+    const modal = document.createElement('div');
+    modal.className = 'tracking-modal-overlay';
+    modal.innerHTML = `
+        <div class="tracking-modal">
+            <div class="modal-header">
+                <h2>Suivi de commande</h2>
+                <button class="modal-close" onclick="this.closest('.tracking-modal-overlay').remove()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="tracking-order-number">Commande: <strong>${orderData.orderNumber}</strong></p>
+                <div class="tracking-timeline">
+                    <div class="tracking-step completed">
+                        <div class="tracking-icon">✓</div>
+                        <div class="tracking-info">
+                            <h4>Commande confirmée</h4>
+                            <p>${orderData.date}</p>
+                        </div>
+                    </div>
+                    <div class="tracking-step active">
+                        <div class="tracking-icon">📦</div>
+                        <div class="tracking-info">
+                            <h4>En préparation</h4>
+                            <p>Votre commande est en cours de traitement</p>
+                        </div>
+                    </div>
+                    <div class="tracking-step">
+                        <div class="tracking-icon">🚚</div>
+                        <div class="tracking-info">
+                            <h4>En livraison</h4>
+                            <p>Bientôt disponible</p>
+                        </div>
+                    </div>
+                    <div class="tracking-step">
+                        <div class="tracking-icon">✓</div>
+                        <div class="tracking-info">
+                            <h4>Livrée</h4>
+                            <p>En attente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
 }
 
 

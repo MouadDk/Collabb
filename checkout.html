@@ -66,10 +66,25 @@
                     <div class="cart-review">
                         <h3>Articles dans votre panier</h3>
                         <div id="checkout-cart-items"></div>
+                        
+                        <!-- Promo Code Section -->
+                        <div class="promo-code-section">
+                            <h4>Code promo</h4>
+                            <div class="promo-input-group">
+                                <input type="text" id="promo-code" placeholder="Entrez votre code promo">
+                                <button class="btn-apply-promo" onclick="applyPromoCode()">Appliquer</button>
+                            </div>
+                            <div id="promo-message" class="promo-message"></div>
+                        </div>
+
                         <div class="cart-totals">
                             <div class="total-row">
                                 <span>Sous-total:</span>
                                 <span id="checkout-subtotal">0.00€</span>
+                            </div>
+                            <div class="total-row discount-row" id="discount-row" style="display: none;">
+                                <span>Réduction (<span id="discount-code"></span>):</span>
+                                <span id="checkout-discount" class="discount-amount">-0.00€</span>
                             </div>
                             <div class="total-row">
                                 <span>TVA (20%):</span>
@@ -123,7 +138,10 @@
                         <h3>Informations de la carte</h3>
                         <div class="form-group">
                             <label for="card-number">Numéro de carte</label>
-                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+                            <div class="card-input-wrapper">
+                                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+                                <div class="card-type-icon" id="card-type-icon"></div>
+                            </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
@@ -138,6 +156,14 @@
                         <div class="form-group">
                             <label for="card-name">Nom sur la carte</label>
                             <input type="text" id="card-name" placeholder="Nom complet">
+                        </div>
+                        
+                        <!-- Save Card Option -->
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="save-card">
+                                <span>Enregistrer cette carte pour les futurs achats</span>
+                            </label>
                         </div>
                     </div>
 
@@ -179,9 +205,25 @@
 
                     <div class="receipt-section">
                         <h3>Télécharger votre reçu</h3>
-                        <button class="btn-primary" onclick="downloadReceipt()">
-                            <span>📄</span>
-                            <span>Télécharger le reçu PDF</span>
+                        <div class="receipt-actions">
+                            <button class="btn-primary" onclick="downloadReceipt()">
+                                <span>📄</span>
+                                <span>Télécharger le reçu PDF</span>
+                            </button>
+                            <button class="btn-secondary" onclick="emailReceipt()">
+                                <span>📧</span>
+                                <span>Envoyer par email</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Order Tracking -->
+                    <div class="order-tracking">
+                        <h3>Suivi de commande</h3>
+                        <p>Vous pouvez suivre votre commande en temps réel</p>
+                        <button class="btn-track" onclick="trackOrder()">
+                            <span>📦</span>
+                            <span>Suivre ma commande</span>
                         </button>
                     </div>
 

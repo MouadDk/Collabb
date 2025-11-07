@@ -325,6 +325,18 @@ nav {
     border-radius: 10px;
 }
 
+.checkout-item-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
 .checkout-item-details {
     flex: 1;
 }
@@ -688,6 +700,370 @@ nav {
     align-items: center;
     gap: 1rem;
     margin: 0 auto;
+}
+
+.order-item-name {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.order-item-icon {
+    font-size: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 8px;
+}
+
+/* Promo Code Section */
+.promo-code-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #fff9e6 0%, #fffbf0 100%);
+    border-radius: 12px;
+    border: 2px dashed #ffd700;
+}
+
+.promo-code-section h4 {
+    color: #1a1f2e;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.promo-input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.promo-input-group input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.promo-input-group input:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+.promo-input-group input:disabled {
+    background: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.btn-apply-promo {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #1a1f2e;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-apply-promo:hover {
+    background: linear-gradient(135deg, #e6c200, #ffed4e);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.promo-message {
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.promo-message.success {
+    color: #00a86b;
+    background: #e6f9f0;
+}
+
+.promo-message.error {
+    color: #ff4444;
+    background: #ffe6e6;
+}
+
+.discount-row {
+    color: #00a86b;
+}
+
+.discount-amount {
+    color: #00a86b !important;
+    font-weight: 700;
+}
+
+/* Card Input Wrapper */
+.card-input-wrapper {
+    position: relative;
+}
+
+.card-type-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: #f0f0f0;
+}
+
+.card-type-icon.visa {
+    background: #1434CB;
+    color: white;
+}
+
+.card-type-icon.mastercard {
+    background: #EB001B;
+    color: white;
+}
+
+.card-type-icon.amex {
+    background: #006FCF;
+    color: white;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+    margin-top: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: #1a1f2e;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #ffd700;
+}
+
+/* Receipt Actions */
+.receipt-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.receipt-actions button {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Order Tracking */
+.order-tracking {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.order-tracking h3 {
+    color: #1a1f2e;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.order-tracking p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.btn-track {
+    background: linear-gradient(135deg, #00d4ff, #00b8d4);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-track:hover {
+    background: linear-gradient(135deg, #00b8d4, #0097a7);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+}
+
+/* Tracking Modal */
+.tracking-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+}
+
+.tracking-modal {
+    background: white;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.tracking-modal .modal-header {
+    padding: 2rem;
+    border-bottom: 2px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tracking-modal .modal-header h2 {
+    color: #1a1f2e;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.tracking-modal .modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tracking-modal .modal-close:hover {
+    background: #f0f0f0;
+    color: #1a1f2e;
+}
+
+.tracking-modal .modal-body {
+    padding: 2rem;
+}
+
+.tracking-order-number {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.tracking-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tracking-step {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.tracking-step::before {
+    content: '';
+    position: absolute;
+    left: 23px;
+    top: 50px;
+    width: 2px;
+    height: calc(100% + 1.5rem);
+    background: #e0e0e0;
+}
+
+.tracking-step:last-child::before {
+    display: none;
+}
+
+.tracking-step.completed::before {
+    background: #00d4ff;
+}
+
+.tracking-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.tracking-step.completed .tracking-icon {
+    background: #00d4ff;
+    color: white;
+}
+
+.tracking-step.active .tracking-icon {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #1a1f2e;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.tracking-info h4 {
+    color: #1a1f2e;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.tracking-info p {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.tracking-step.active .tracking-info h4 {
+    color: #ffd700;
+    font-weight: 700;
 }
 
 /* Responsive */
