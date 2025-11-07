@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (buttonText === "Commencer maintenant" || buttonText === "Commencer gratuitement") {
             if (loggedInUser) {
-                button.href = 'home.html';
+                button.href = 'index.html';
                 button.textContent = 'Accéder au tableau de bord';
             } else {
                 button.href = 'sign_up.html';
